@@ -1,3 +1,6 @@
+<?php
+include 'db.php';
+?>
 <div class="col-md-4">
 
     <!-- Blog Search Well -->
@@ -20,6 +23,16 @@
         <div class="row">
             <div class="col-lg-6">
                 <ul class="list-unstyled">
+                    <?php
+                    $categoryQuery = 'SELECT * FROM categories';
+                    $categoryQueryResult = mysqli_query($dbConnection, $categoryQuery);
+
+
+                    while ($dbRow = mysqli_fetch_assoc($categoryQueryResult)) {
+                        $categoryName = $dbRow['name'];
+                        echo "<li><a href='#'>{$categoryName}</a>";
+                    }
+                    ?>
                     <li><a href="#">Category Name</a>
                     </li>
                     <li><a href="#">Category Name</a>
