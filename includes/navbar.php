@@ -17,7 +17,7 @@
                     <a href="#">About</a>
                 </li>
                 <li>
-                    <a href="#">Admin Dashboard</a>
+                    <a href="admin_dashboard">Admin Dashboard</a>
                 </li>
                 <li>
                     <a href="#">Contact</a>
