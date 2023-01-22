@@ -2,6 +2,8 @@
 include 'includes/header.php';
 ?>
 
+
+
 <body>
 
     <div id="wrapper">
@@ -22,6 +24,7 @@ include 'includes/header.php';
                             Administrator Dashboard
                             <small>Subheading</small>
                         </h1>
+
 
                     </div>
                 </div>
