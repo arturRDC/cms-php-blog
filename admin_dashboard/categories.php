@@ -48,24 +48,48 @@ include 'includes/header.php';
                                     <input class="form-control" type="text" name="category-name">
                                 </div>
                                 <div class="form-group">
-                                    <input class="btn btn-primary" type="submit" name="submit" value="Create category">
+                                    <input class="btn btn-primary" type="submit" name="submit" value="Create">
+                                </div>
+                            </form>
+
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <label for="category-name">Edit Category: </label>
+                                    <?php
+                                    if (isset($_GET['edit'])) {
+                                        $editCategoryId = $_GET['edit'];
+
+                                        $editCategoryQuery = "SELECT * FROM categories WHERE id = {$editCategoryId}";
+                                        $editCategoryQueryResult = mysqli_query($dbConnection, $editCategoryQuery);
+                                        while ($catList = mysqli_fetch_assoc($editCategoryQueryResult)) {
+                                            $categoryName = $catList['name'];
+                                        }
+                                        echo "<input value='{$categoryName}' class='form-control' type='text' name='category-name'>";
+                                    }
+                                    ?>
+                                </div>
+                                <div class="form-group">
+                                    <input class="btn btn-primary" type="submit" name="submit" value="Save">
                                 </div>
                             </form>
                         </div>
                         <div class="col-xs-6">
 
+
+
                             <?php
                             // Read categories
                             $createCategoryQuery = 'SELECT * FROM categories';
                             $createCategoryQueryResult = mysqli_query($dbConnection, $createCategoryQuery);
+
                             ?>
 
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover ">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
-                                        <th>Category name</th>
-                                        <th style="border:none;"></th>
+                                        <th class='text-center'>Id</th>
+                                        <th class='text-center'>Category Name</th>
+
                                     </tr>
                                 <tbody>
                                     <?php
@@ -74,9 +98,9 @@ include 'includes/header.php';
                                         $categoryId = $dbRow['id'];
                                         $categoryName = $dbRow['name'];
 
-                                        echo "<th>{$categoryId}</th>";
-                                        echo "<th>{$categoryName}</th>";
-                                        echo "<td class='delete'><a href='categories.php?delete={$categoryId}'>Delete</a></td>";
+                                        echo "<td class='text-center'>{$categoryId}</td>";
+                                        echo "<td class='text-center'>{$categoryName}</td>";
+                                        echo "<td class='text-center'><a href='categories.php?delete={$categoryId}'>Delete </a><a href='categories.php?edit={$categoryId}'>  Edit</a></td>";
                                         echo '</tr>';
                                     }
                                     ?>
