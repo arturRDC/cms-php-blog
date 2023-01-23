@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include __DIR__ . '/../../includes/db.php';
 ?>
 

@@ -60,11 +60,12 @@ include 'includes/header.php';
                             $createCategoryQueryResult = mysqli_query($dbConnection, $createCategoryQuery);
                             ?>
 
-                            <table class="table table-hover table-bordered">
+                            <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
                                         <th>Category name</th>
+                                        <th style="border:none;"></th>
                                     </tr>
                                 <tbody>
                                     <?php
@@ -75,9 +76,24 @@ include 'includes/header.php';
 
                                         echo "<th>{$categoryId}</th>";
                                         echo "<th>{$categoryName}</th>";
+                                        echo "<td class='delete'><a href='categories.php?delete={$categoryId}'>Delete</a></td>";
                                         echo '</tr>';
                                     }
                                     ?>
+
+                                    <?php
+                                    if (isset($_GET['delete'])) {
+                                        $categoryId = $_GET['delete'];
+                                        $deleteCategoryQuery = "DELETE FROM categories WHERE id = {$categoryId}";
+                                        $deleteCategoryQueryResult =  mysqli_query($dbConnection, $deleteCategoryQuery);
+
+                                        if (!$deleteCategoryQueryResult) {
+                                            echo 'Error: unable to delete category' . mysqli_error($dbConnection);
+                                        }
+                                        header('Location: categories.php');
+                                    }
+                                    ?>
+
                                 </tbody>
                                 </thead>
                             </table>
