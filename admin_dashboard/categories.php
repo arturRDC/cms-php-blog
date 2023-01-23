@@ -52,26 +52,13 @@ include 'includes/header.php';
                                 </div>
                             </form>
 
-                            <form action="" method="post">
-                                <div class="form-group">
-                                    <label for="category-name">Edit Category: </label>
-                                    <?php
-                                    if (isset($_GET['edit'])) {
-                                        $editCategoryId = $_GET['edit'];
+                            <?php
+                            if (isset($_GET['edit'])) {
+                                $categoryId = $_GET['edit'];
+                                include '__DIR__' . '/../includes/edit_categories.php';
+                            }
+                            ?>
 
-                                        $editCategoryQuery = "SELECT * FROM categories WHERE id = {$editCategoryId}";
-                                        $editCategoryQueryResult = mysqli_query($dbConnection, $editCategoryQuery);
-                                        while ($catList = mysqli_fetch_assoc($editCategoryQueryResult)) {
-                                            $categoryName = $catList['name'];
-                                        }
-                                        echo "<input value='{$categoryName}' class='form-control' type='text' name='category-name'>";
-                                    }
-                                    ?>
-                                </div>
-                                <div class="form-group">
-                                    <input class="btn btn-primary" type="submit" name="submit" value="Save">
-                                </div>
-                            </form>
                         </div>
                         <div class="col-xs-6">
 
