@@ -1,0 +1,87 @@
+<?php
+include 'includes/header.php';
+?>
+
+
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <?php
+        include 'includes/navigation.php';
+        ?>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Administrator Dashboard
+                            <small>Subheading</small>
+                        </h1>
+
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Tags</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Image</th>
+                                    <th>Comments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $postQuery = 'SELECT * FROM posts';
+                                $postQueryResult = mysqli_query($dbConnection, $postQuery);
+
+
+                                while ($dbRow = mysqli_fetch_assoc($postQueryResult)) {
+                                    $postTitle = $dbRow['title'];
+                                    $postId = $dbRow['id'];
+                                    $postTags = $dbRow['tags'];
+                                    $postAuthor = $dbRow['author'];
+                                    $postDate = $dbRow['date'];
+                                    $postImage = $dbRow['image'];
+                                    $postStatus = $dbRow['status'];
+                                    $postCommentAmount = $dbRow['comment_amount'];
+
+                                    echo "<tr>";
+                                    echo "<td>$postId</td>";
+                                    echo "<td>$postTitle</td>";
+                                    echo "<td>$postAuthor</td>";
+                                    echo "<td>$postTags</td>";
+                                    echo "<td>$postDate</td>";
+                                    echo "<td>$postStatus</td>";
+                                    echo "<td><img width='100' src='../images/$postImage' alt='image'></td>";
+                                    echo "<td>$postCommentAmount</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    <?php
+    include 'includes/footer.php';
+    ?>
