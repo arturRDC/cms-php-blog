@@ -7,7 +7,7 @@
             <a href="javascript:;" data-toggle="collapse" data-target="#posts-menu"><i class="fa fa-fw fa-arrows-v"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="posts-menu" class="collapse">
                 <li>
-                    <a href="#">Add new post</a>
+                    <a href="add_post.php">Add new post</a>
                 </li>
                 <li>
                     <a href="posts.php">View all posts</a>
