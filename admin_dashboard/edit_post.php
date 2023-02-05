@@ -2,8 +2,8 @@
 include 'includes/header.php';
 
 
-if (isset($_GET['edit'])) {
-    $editedPostId = $_GET['edit'];
+if (isset($_GET['id'])) {
+    $editedPostId = $_GET['id'];
 
     $postQuery = "SELECT * FROM posts WHERE id = {$editedPostId}";
     $editPostQueryResult = mysqli_query($dbConnection, $postQuery);
@@ -21,9 +21,10 @@ if (isset($_GET['edit'])) {
         $postImage = $dbRow['image'];
 
 
-
         $postCommentAmount = $dbRow['comment_amount'];
     }
+
+
 
 
     // $addPostQuery = "INSERT INTO posts(id, category_id, tags, author, title, date, image, content, status, comment_amount) VALUES ('','{$categoryId}','{$postTags}','{$postAuthor}','{$postTitle}',now(), '{$postImage}' ,'{$postContent}','{$postStatus}',{$postCommentAmount})";
@@ -37,12 +38,32 @@ if (isset($_GET['edit'])) {
     // header('Location: posts.php');
 }
 
+if (isset($_POST['save'])) {
+    $postTitle = $_POST['title'];
+    $postCategoryId = $_POST['post_category'];
+    $postTags = $_POST['tags'];
+    $postStatus = $_POST['status'];
+    $postContent = $_POST['content'];
+    $postAuthor = $_POST['author'];
+    $postImageNew = $_FILES['image']['name'];
+    $postLocalImage = $_FILES['image']['tmp_name'];
+    $postId = $_GET['id'];
+
+    move_uploaded_file($postLocalImage, "../images/$postImage");
+
+    $editPostQuery = "UPDATE posts SET category_id = {$postCategoryId}, tags = '{$postTags}', author = '{$postAuthor}', title = '{$postTitle}', image = '{$postImageNew}', content = '{$postContent}', status = '{$postStatus}' WHERE id = {$postId}";
+    $editPostQueryResult = mysqli_query($dbConnection, $editPostQuery);
+    if (!$editPostQueryResult) {
+        echo 'Unable to edit post' . mysqli_error($dbConnection);
+    }
+    header('Location: posts.php');
+}
+
 ?>
 
 
 
 <body>
-
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -61,6 +82,11 @@ if (isset($_GET['edit'])) {
                             Administrator Dashboard
                             <small>Subheading</small>
                         </h1>
+
+                        <?php
+
+
+                        ?>
                         <form action="" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="title">Title</label>
@@ -68,8 +94,8 @@ if (isset($_GET['edit'])) {
                             </div>
 
                             <div class="form-group">
-                                <label for="category">Category</label>
-                                <select name="post-category" id="post-category">
+                                <label for="post_category">Category</label>
+                                <select name="post_category" id="post_category">
 
                                     <?php
                                     $readCategoryQuery = 'SELECT * FROM categories';
@@ -90,6 +116,7 @@ if (isset($_GET['edit'])) {
                             <div class="form-group">
                                 <label for="post-image">Image</label>
                                 <img width="100" src="../images/<?php echo $postImage ?>" alt="post-image" name="post-image">
+                                <input type="file" name="image">
                             </div>
                             <div class="form-group">
                                 <label for="tags">Tags</label>
@@ -106,7 +133,7 @@ if (isset($_GET['edit'])) {
                                 </textarea>
                             </div>
                             <div class="form-group">
-                                <input class="btn btn-primary" type="submit" name="submit" value="Publish">
+                                <input class="btn btn-primary" type="submit" name="save" value="Save">
                             </div>
 
 
