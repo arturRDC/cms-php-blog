@@ -63,12 +63,20 @@ include 'includes/header.php';
                                     echo "<td>$postStatus</td>";
                                     echo "<td><img width='100' src='../images/$postImage' alt='image'></td>";
                                     echo "<td>$postCommentAmount</td>";
+                                    echo "<td><a href='posts.php?delete={$postId}'>Delete</td>";
                                     echo "</tr>";
                                 }
                                 ?>
                             </tbody>
                         </table>
-
+                        <?php
+                        if (isset($_GET['delete'])) {
+                            $idDelete = $_GET['delete'];
+                            $deleteQuery = "DELETE FROM posts WHERE id = {$idDelete}";
+                            $deleteResult = mysqli_query($dbConnection, $deleteQuery);
+                            header('Location: posts.php');
+                        }
+                        ?>
 
                     </div>
                 </div>
