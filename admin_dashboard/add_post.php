@@ -26,6 +26,7 @@ if (isset($_POST['submit'])) {
     if (!$addPostQueryResult) {
         echo 'failed to add post' . mysqli_error($dbConnection);
     }
+    header('Location: posts.php');
 }
 
 ?>
