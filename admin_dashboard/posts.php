@@ -63,6 +63,7 @@ include 'includes/header.php';
                                     echo "<td>$postStatus</td>";
                                     echo "<td><img width='100' src='../images/$postImage' alt='image'></td>";
                                     echo "<td>$postCommentAmount</td>";
+                                    echo "<td><a href='edit_post.php?edit={$postId}'>Edit</td>";
                                     echo "<td><a href='posts.php?delete={$postId}'>Delete</td>";
                                     echo "</tr>";
                                 }

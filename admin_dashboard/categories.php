@@ -66,8 +66,8 @@ include 'includes/header.php';
 
                             <?php
                             // Read categories
-                            $createCategoryQuery = 'SELECT * FROM categories';
-                            $createCategoryQueryResult = mysqli_query($dbConnection, $createCategoryQuery);
+                            $readCategoryQuery = 'SELECT * FROM categories';
+                            $readCategoryQueryResult = mysqli_query($dbConnection, $readCategoryQuery);
 
                             ?>
 
@@ -80,7 +80,7 @@ include 'includes/header.php';
                                     </tr>
                                 <tbody>
                                     <?php
-                                    while ($dbRow = mysqli_fetch_assoc($createCategoryQueryResult)) {
+                                    while ($dbRow = mysqli_fetch_assoc($readCategoryQueryResult)) {
                                         echo '<tr>';
                                         $categoryId = $dbRow['id'];
                                         $categoryName = $dbRow['name'];
