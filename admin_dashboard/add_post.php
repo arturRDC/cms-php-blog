@@ -22,11 +22,11 @@ if (isset($_POST['submit'])) {
     echo $addPostQuery;
 
     $addPostQueryResult = mysqli_query($dbConnection, $addPostQuery);
+    header('Location: posts.php');
 
     if (!$addPostQueryResult) {
         echo 'failed to add post' . mysqli_error($dbConnection);
     }
-    header('Location: posts.php');
 }
 
 ?>
