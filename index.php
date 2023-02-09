@@ -34,7 +34,7 @@ include 'includes/navbar.php';
                 $postAuthor = $dbRow['author'];
                 $postTitle = $dbRow['title'];
                 $postDate = $dbRow['date'];
-                $postContent = $dbRow['content'];
+                $postContent = substr($dbRow['content'], 0, 150);
                 $postImage = $dbRow['image'];
                 $postCommentAmount = $dbRow['comment_amount'];
             ?>
