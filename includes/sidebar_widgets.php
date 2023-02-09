@@ -34,7 +34,8 @@ include 'db.php';
 
                     while ($dbRow = mysqli_fetch_assoc($categoryQueryResult)) {
                         $categoryName = $dbRow['name'];
-                        echo "<li><a href='#'>{$categoryName}</a>";
+                        $categoryId = $dbRow['id'];
+                        echo "<li><a href='categories.php?id={$categoryId}'>{$categoryName}</a>";
                     }
                     ?>
 

@@ -3,7 +3,7 @@ include 'includes/header.php';
 
 if (isset($_POST['submit'])) {
     $postTitle = $_POST['title'];
-    $categoryId = $_POST['category-id'];
+    $categoryId = $_POST['post_category'];
     $postTags = $_POST['tags'];
     $postStatus = $_POST['status'];
     $postContent = $_POST['content'];
@@ -58,8 +58,20 @@ if (isset($_POST['submit'])) {
                                 <input type="text" class="form-control" name="title">
                             </div>
                             <div class="form-group">
-                                <label for="category">Category Id</label>
-                                <input type="text" class="form-control" name="category-id">
+                                <label for="category">Category</label>
+                                <select name="post_category" id="post_category">
+
+                                    <?php
+                                    $readCategoryQuery = 'SELECT * FROM categories';
+                                    $readCategoryQueryResult = mysqli_query($dbConnection, $readCategoryQuery);
+                                    if (!$readCategoryQueryResult) die("Unable to read categories" . mysqli_error($dbConnection));
+                                    while ($dbRow = mysqli_fetch_assoc($readCategoryQueryResult)) {
+                                        $categoryId = $dbRow['id'];
+                                        $categoryName = $dbRow['name'];
+                                        echo "<option value='{$categoryId}'>{$categoryName}</option>";
+                                    }
+                                    ?>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="author">Author</label>

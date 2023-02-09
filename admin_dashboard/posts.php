@@ -34,6 +34,7 @@ include 'includes/header.php';
                                     <th>Tags</th>
                                     <th>Date</th>
                                     <th>Status</th>
+                                    <th>Category</th>
                                     <th>Image</th>
                                     <th>Comments</th>
                                 </tr>
@@ -52,6 +53,7 @@ include 'includes/header.php';
                                     $postDate = $dbRow['date'];
                                     $postImage = $dbRow['image'];
                                     $postStatus = $dbRow['status'];
+                                    $postCategory = $dbRow['category_id'];
                                     $postCommentAmount = $dbRow['comment_amount'];
 
                                     echo "<tr>";
@@ -61,6 +63,15 @@ include 'includes/header.php';
                                     echo "<td>$postTags</td>";
                                     echo "<td>$postDate</td>";
                                     echo "<td>$postStatus</td>";
+                                    // Read category
+                                    $readCategoryQuery = "SELECT * FROM categories WHERE id = {$postCategory}";
+                                    $readCategoryQueryResult = mysqli_query($dbConnection, $readCategoryQuery);
+
+                                    while ($dbRow = mysqli_fetch_assoc($readCategoryQueryResult)) {
+                                        $categoryName = $dbRow['name'];
+
+                                        echo "<td>$categoryName</td>";
+                                    }
                                     echo "<td><img width='100' src='../images/$postImage' alt='image'></td>";
                                     echo "<td>$postCommentAmount</td>";
                                     echo "<td><a href='edit_post.php?id={$postId}'>Edit</td>";
@@ -71,6 +82,7 @@ include 'includes/header.php';
                             </tbody>
                         </table>
                         <?php
+                        // Delete category
                         if (isset($_GET['delete'])) {
                             $idDelete = $_GET['delete'];
                             $deleteQuery = "DELETE FROM posts WHERE id = {$idDelete}";

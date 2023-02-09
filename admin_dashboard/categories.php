@@ -64,12 +64,6 @@ include 'includes/header.php';
 
 
 
-                            <?php
-                            // Read categories
-                            $readCategoryQuery = 'SELECT * FROM categories';
-                            $readCategoryQueryResult = mysqli_query($dbConnection, $readCategoryQuery);
-
-                            ?>
 
                             <table class="table table-striped table-hover ">
                                 <thead>
@@ -80,6 +74,10 @@ include 'includes/header.php';
                                     </tr>
                                 <tbody>
                                     <?php
+                                    // Read categories
+                                    $readCategoryQuery = 'SELECT * FROM categories';
+                                    $readCategoryQueryResult = mysqli_query($dbConnection, $readCategoryQuery);
+
                                     while ($dbRow = mysqli_fetch_assoc($readCategoryQueryResult)) {
                                         echo '<tr>';
                                         $categoryId = $dbRow['id'];

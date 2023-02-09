@@ -24,7 +24,10 @@ include 'includes/navbar.php';
 
             <!-- First Blog Post -->
             <?php
-            $postQuery = 'SELECT * FROM posts';
+            if (isset($_GET['id'])) {
+                $category_id = $_GET['id'];
+            }
+            $postQuery = "SELECT * FROM posts WHERE category_id = {$category_id}";
             $postQueryResult = mysqli_query($dbConnection, $postQuery);
 
 
