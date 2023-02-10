@@ -74,9 +74,9 @@ include 'includes/header.php';
                                     }
 
                                     // echo "<td>{$repliedPostId}</td>";
-                                    echo "<td><a href='edit_post.php?id={$commentId}'>Approve</td>";
-                                    echo "<td><a href='edit_post.php?id={$commentId}'>Reject</td>";
-                                    echo "<td><a href='posts.php?delete={$commentId}'>Delete</td>";
+                                    echo "<td><a href='comments.php?approve={$commentId}'>Approve</td>";
+                                    echo "<td><a href='comments.php?reject={$commentId}'>Reject</td>";
+                                    echo "<td><a href='comments.php?delete={$commentId}'>Delete</td>";
                                     echo "</tr>";
                                 }
                                 ?>
@@ -84,12 +84,26 @@ include 'includes/header.php';
                             </tbody>
                         </table>
                         <?php
-                        // Delete category
+                        // Delete comment
                         if (isset($_GET['delete'])) {
                             $idDelete = $_GET['delete'];
-                            $deleteQuery = "DELETE FROM posts WHERE id = {$idDelete}";
-                            $deleteResult = mysqli_query($dbConnection, $deleteQuery);
-                            header('Location: posts.php');
+                            $deleteQuery = "DELETE FROM comments WHERE comment_id = {$idDelete}";
+                            $deleteQueryResult = mysqli_query($dbConnection, $deleteQuery);
+                            header('Location: comments.php');
+                        }
+                        // Approve comment
+                        if (isset($_GET['approve'])) {
+                            $idApprove = $_GET['approve'];
+                            $approveQuery = "UPDATE comments SET status = 'approved' WHERE comment_id = {$idApprove}";
+                            $deleteQueryResult = mysqli_query($dbConnection, $approveQuery);
+                            header('Location: comments.php');
+                        }
+                        // Reject comment
+                        if (isset($_GET['reject'])) {
+                            $idReject = $_GET['reject'];
+                            $rejectQuery = "UPDATE comments SET status = 'unapproved' WHERE comment_id = {$idReject}";
+                            $rejectQueryResult = mysqli_query($dbConnection, $rejectQuery);
+                            header('Location: comments.php');
                         }
                         ?>
 
