@@ -60,7 +60,7 @@ include 'includes/navbar.php';
 
             <hr>
 
-            <?php include "comments.php" ?>
+            <?php include "includes/comments.php" ?>
 
         </div>
 
