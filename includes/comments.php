@@ -7,11 +7,15 @@ if (isset($_POST['post_comment'])) {
     $commentEmail = $_POST['comment_email'];
     $commentContent = $_POST['comment_content'];
 
-
+    // Insert comment in database
     $commentQuery = "INSERT INTO comments(post_id, date, author, email, content, status) ";
     $commentQuery .= "VALUES ({$postId}, now(), '{$commentAuthor}', '{$commentEmail}', '{$commentContent}', 'unapproved')";
 
     $commentQueryResult = mysqli_query($dbConnection, $commentQuery);
+
+    // Update comment count in database
+    $commentCountQuery = "UPDATE posts SET comment_amount = comment_amount + 1 WHERE id = {$postId}";
+    $commentCountQueryResult = mysqli_query($dbConnection, $commentCountQuery);
 }
 ?>
 
