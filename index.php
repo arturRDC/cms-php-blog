@@ -24,10 +24,11 @@ include 'includes/navbar.php';
 
             <!-- First Blog Post -->
             <?php
-            $postQuery = 'SELECT * FROM posts';
+            $postQuery = "SELECT * FROM posts WHERE status = 'published'";
             $postQueryResult = mysqli_query($dbConnection, $postQuery);
-
-
+            if (mysqli_num_rows($postQueryResult) == 0) {
+                echo "<h1 class='text-center'> No Posts Found </h1>";
+            }
             while ($dbRow = mysqli_fetch_assoc($postQueryResult)) {
                 $postId = $dbRow['id'];
                 $postTags = $dbRow['tags'];
@@ -37,6 +38,7 @@ include 'includes/navbar.php';
                 $postContent = substr($dbRow['content'], 0, 150);
                 $postImage = $dbRow['image'];
                 $postCommentAmount = $dbRow['comment_amount'];
+
             ?>
                 <h2>
                     <?php echo "<a href='post.php?id={$postId}'>{$postTitle}</a>" ?>

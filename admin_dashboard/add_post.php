@@ -21,11 +21,11 @@ if (isset($_POST['submit'])) {
     $addPostQuery = "INSERT INTO posts(id, category_id, tags, author, title, date, image, content, status, comment_amount) VALUES ('','{$categoryId}','{$postTags}','{$postAuthor}','{$postTitle}',now(), '{$postImage}' ,'{$postContent}','{$postStatus}',{$postCommentAmount})";
 
     $addPostQueryResult = mysqli_query($dbConnection, $addPostQuery);
-    header('Location: posts.php');
 
     if (!$addPostQueryResult) {
         echo 'failed to add post' . mysqli_error($dbConnection);
     }
+    header('Location: posts.php');
 }
 
 ?>
