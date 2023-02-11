@@ -32,10 +32,10 @@
             <a href="javascript:;" data-toggle="collapse" data-target="#users-menu"><i class="fa fa-fw fa-arrows-v"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="users-menu" class="collapse">
                 <li>
-                    <a href="#">Dropdown Item</a>
+                    <a href="add_user.php">Add user</a>
                 </li>
                 <li>
-                    <a href="#">Dropdown Item</a>
+                    <a href="users.php">View all users</a>
                 </li>
             </ul>
         </li>
