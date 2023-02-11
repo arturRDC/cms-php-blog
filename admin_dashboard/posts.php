@@ -28,15 +28,16 @@ include 'includes/header.php';
                         <table class="table table-striped table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Title</th>
-                                    <th>Author</th>
-                                    <th>Tags</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th>Category</th>
-                                    <th>Image</th>
-                                    <th>Comments</th>
+                                    <th class="text-center">Id</th>
+                                    <th class="text-center">Title</th>
+                                    <th class="text-center">Author</th>
+                                    <th class="text-center">Tags</th>
+                                    <th class="text-center">Date</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Category</th>
+                                    <th class="text-center">Image</th>
+                                    <th class="text-center">Comments</th>
+                                    <th class="text-center" colspan="2">Control</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,11 +59,11 @@ include 'includes/header.php';
 
                                     echo "<tr>";
                                     echo "<td>$postId</td>";
-                                    echo "<td>$postTitle</td>";
-                                    echo "<td>$postAuthor</td>";
-                                    echo "<td>$postTags</td>";
-                                    echo "<td>$postDate</td>";
-                                    echo "<td>$postStatus</td>";
+                                    echo "<td class='text-center'>$postTitle</td>";
+                                    echo "<td class='text-center'>$postAuthor</td>";
+                                    echo "<td class='text-center'>$postTags</td>";
+                                    echo "<td class='text-center'>$postDate</td>";
+                                    echo "<td class='text-center'>$postStatus</td>";
                                     // Read category
                                     $readCategoryQuery = "SELECT * FROM categories WHERE id = {$postCategory}";
                                     $readCategoryQueryResult = mysqli_query($dbConnection, $readCategoryQuery);
@@ -73,7 +74,7 @@ include 'includes/header.php';
                                         echo "<td>$categoryName</td>";
                                     }
                                     echo "<td><img width='100' src='../images/$postImage' alt='image'></td>";
-                                    echo "<td>$postCommentAmount</td>";
+                                    echo "<td class='text-center'>$postCommentAmount</td>";
                                     echo "<td><a href='edit_post.php?id={$postId}'>Edit</td>";
                                     echo "<td><a href='posts.php?delete={$postId}'>Delete</td>";
                                     echo "</tr>";
