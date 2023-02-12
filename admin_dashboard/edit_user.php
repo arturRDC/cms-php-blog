@@ -10,11 +10,18 @@ if (isset($_POST['save_user'])) {
     $userLastName = $_POST['last_name'];
     $userEmail = $_POST['email'];
     $userRole = $_POST['role'];
+    $Hformat = '$2y$10$';
+
+    $saltQuery = "SELECT * FROM users WHERE id={$userId}";
+    $saltQueryResult = mysqli_query($dbConnection, $saltQuery);
+    while ($dbRow = mysqli_fetch_assoc($saltQueryResult)) {
+        $userRandomSalt = $dbRow['random_salt'];
+    }
+    $hashedPassword = crypt($userPassword, $Hformat . $userRandomSalt);
 
 
 
-
-    $saveUserQuery = "UPDATE users SET username = '{$userUsername}', password='{$userPassword}',first_name='{$userFirstName}',last_name='{$userLastName}',email='{$userEmail}', role='{$userRole}' WHERE id = {$userId}";
+    $saveUserQuery = "UPDATE users SET username = '{$userUsername}', password='{$hashedPassword}',first_name='{$userFirstName}',last_name='{$userLastName}',email='{$userEmail}', role='{$userRole}' WHERE id = {$userId}";
     echo $saveUserQuery;
     $saveUserQueryResult = mysqli_query($dbConnection, $saveUserQuery);
 
@@ -57,11 +64,11 @@ if (isset($_POST['save_user'])) {
 
                             while ($dbRow = mysqli_fetch_assoc($userQueryResult)) {
                                 $userUsername = $dbRow['username'];
-                                $userPassword = $dbRow['password'];
                                 $userFirstName = $dbRow['first_name'];
                                 $userLastName = $dbRow['last_name'];
                                 $userEmail = $dbRow['email'];
                                 $userRole = $dbRow['role'];
+                                $userRandomSalt = $dbRow['random_salt'];
                             }
                         }
                         ?>
@@ -76,7 +83,7 @@ if (isset($_POST['save_user'])) {
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" name="password" value="<?php echo $userPassword ?>">
+                                <input type="password" class="form-control" name="password">
                             </div>
                             <div class="form-group">
                                 <label for="role">Role</label>

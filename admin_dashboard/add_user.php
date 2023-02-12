@@ -9,9 +9,11 @@ if (isset($_POST['add_user'])) {
     $userEmail = $_POST['email'];
     $userRole = $_POST['role'];
     $userRandomSalt = bin2hex(openssl_random_pseudo_bytes(11));
+    $Hformat = '$2y$10$';
+    $hashedPassword = crypt($userPassword, $Hformat . $userRandomSalt);
 
 
-    $addUserQuery = "INSERT INTO users(id, username, password, first_name, last_name, email, role, random_salt) VALUES ('','{$userUsername}','{$userPassword}','{$userFirstName}','{$userLastName}','{$userEmail}', '{$userRole}', '{$userRandomSalt}')";
+    $addUserQuery = "INSERT INTO users(id, username, password, first_name, last_name, email, role, random_salt) VALUES ('','{$userUsername}','{$hashedPassword}','{$userFirstName}','{$userLastName}','{$userEmail}', '{$userRole}', '{$userRandomSalt}')";
     $addUserQueryResult = mysqli_query($dbConnection, $addUserQuery);
 
     if (!$addUserQueryResult) {
