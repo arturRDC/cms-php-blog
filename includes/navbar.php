@@ -22,6 +22,12 @@
                 <li>
                     <a href="#">Contact</a>
                 </li>
+                <li>
+                    <a href="login.php">Login</a>
+                </li>
+                <li>
+                    <a href="signup.php">Signup</a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
