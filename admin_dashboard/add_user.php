@@ -8,11 +8,10 @@ if (isset($_POST['add_user'])) {
     $userLastName = $_POST['last_name'];
     $userEmail = $_POST['email'];
     $userRole = $_POST['role'];
+    $userRandomSalt = bin2hex(openssl_random_pseudo_bytes(11));
 
 
-
-    $addUserQuery = "INSERT INTO users(id, username, password, first_name, last_name, email, role) VALUES ('','{$userUsername}','{$userPassword}','{$userFirstName}','{$userLastName}','{$userEmail}', '{$userRole}')";
-    echo $addUserQuery;
+    $addUserQuery = "INSERT INTO users(id, username, password, first_name, last_name, email, role, random_salt) VALUES ('','{$userUsername}','{$userPassword}','{$userFirstName}','{$userLastName}','{$userEmail}', '{$userRole}', '{$userRandomSalt}')";
     $addUserQueryResult = mysqli_query($dbConnection, $addUserQuery);
 
     if (!$addUserQueryResult) {

@@ -18,8 +18,11 @@ if (isset($_POST['signup'])) {
     $userPassword = $_POST['password'];
     $userFirstName = $_POST['first_name'];
     $userLastName = $_POST['last_name'];
+    $userRandomSalt = bin2hex(openssl_random_pseudo_bytes(11));
+    $Hformat = '$2y$10$';
+    $hashedPassword = crypt($userPassword, $Hformat . $userRandomSalt);
 
-    $signupQuery = "INSERT INTO users(email, username, password, first_name, last_name, role) VALUES ('{$userEmail}', '{$userUsername}', '{$userPassword}', '{$userFirstName}', '{$userLastName}', 'user')";
+    $signupQuery = "INSERT INTO users(email, username, password, first_name, last_name, role, random_salt) VALUES ('{$userEmail}', '{$userUsername}', '{$hashedPassword}', '{$userFirstName}', '{$userLastName}', 'user', '{$userRandomSalt}')";
     $signupQueryResult = mysqli_query($dbConnection, $signupQuery);
     header("Location: index.php");
 }
