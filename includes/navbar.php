@@ -22,12 +22,22 @@
                 <li>
                     <a href="#">Contact</a>
                 </li>
-                <li>
-                    <a href="login.php">Login</a>
-                </li>
-                <li>
-                    <a href="signup.php">Signup</a>
-                </li>
+                <?php
+                if (!isset($_SESSION['username'])) { // user not logged in
+                    echo
+                    "<li>
+                        <a href='login.php'>Login</a>
+                    </li>
+                    <li>
+                        <a href='signup.php'>Signup</a>
+                    </li>";
+                } else {
+                    echo
+                    "<li>
+                    <a href='logout.php'>Logout</a>
+                    </li>";
+                }
+                ?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

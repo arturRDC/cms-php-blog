@@ -3,7 +3,6 @@ include 'includes/header.php';
 ?>
 
 
-
 <body>
 
     <div id="wrapper">
@@ -17,12 +16,18 @@ include 'includes/header.php';
 
             <div class="container-fluid">
 
+                <?php
+                // header('Location: /../post.php');
+                // echo 'Location: \..\index.php';
+                // header('Location: ..\index.php');
+                ?>
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Administrator Dashboard
-                            <small>Subheading</small>
+                            <br>
+                            <small><?php echo "Welcome, " . $_SESSION['first_name'] ?></small>
                         </h1>
 
 

@@ -5,6 +5,7 @@ include 'includes/header.php';
 include 'includes/db.php';
 ?>
 
+
 <!-- Navigation -->
 <?php
 include 'includes/navbar.php';
@@ -27,11 +28,16 @@ if (isset($_POST['login'])) {
     while ($dbRow = mysqli_fetch_assoc($findUsernameQueryResult)) {
         $userUsername = $dbRow['username'];
         $userPassword = $dbRow['password'];
+        $userFirstName = $dbRow['first_name'];
         $userRole = $dbRow['role'];
         $userSalt = $dbRow['random_salt'];
     }
     $Hformat = '$2y$10$';
-    if (hash_equals($userPassword, crypt($loginPassword, $Hformat . $userSalt))) {
+    if (hash_equals($userPassword, crypt($loginPassword, $Hformat . $userSalt))) { // Login successful
+        $_SESSION['username'] = $userUsername;
+        $_SESSION['first_name'] = $userFirstName;
+        $_SESSION['role'] = $userRole;
+
         if ($userRole === 'admin') {
             header("Location: admin_dashboard/index.php");
         } else {
