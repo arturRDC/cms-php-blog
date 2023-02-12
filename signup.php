@@ -19,7 +19,7 @@ if (isset($_POST['signup'])) {
     $userFirstName = $_POST['first_name'];
     $userLastName = $_POST['last_name'];
 
-    $signupQuery = "INSERT INTO users(email, username, password, first_name, last_name) VALUES ('{$userEmail}', '{$userUsername}', '{$userPassword}', '{$userFirstName}', '{$userLastName}')";
+    $signupQuery = "INSERT INTO users(email, username, password, first_name, last_name, role) VALUES ('{$userEmail}', '{$userUsername}', '{$userPassword}', '{$userFirstName}', '{$userLastName}', 'user')";
     $signupQueryResult = mysqli_query($dbConnection, $signupQuery);
     header("Location: index.php");
 }
