@@ -53,7 +53,7 @@ if (isset($_POST['save'])) {
 
     if ($userImageNew) {
         $userLocalImage = $_FILES['image']['tmp_name'];
-        move_uploaded_file($userLocalImage, "../images/$userImageNew");
+        move_uploaded_file($userLocalImage, "images/$userImageNew");
     } else {
         $userImageNew = $userImage;
     }
@@ -67,9 +67,8 @@ if (isset($_POST['save'])) {
     if ($inputPassword == '') {
         $hashedPassword = $userPassword;
     }
-
-    // $signupQuery = "UPDATE users SET email='{$userEmail}', username='{$userUsername}', password='{$userPassword}', first_name='{$userFirstName}', last_name='{$userLastName}'";
-    $saveProfileQuery = "UPDATE users SET username = '{$inputUsername}', password='{$hashedPassword}',first_name='{$inputFirstName}',last_name='{$inputLastName}',email='{$inputEmail}', role='{$inputRole}', picture='{$userImageNew}' WHERE id = {$userId}";
+    echo $userImageNew;
+    $saveProfileQuery = "UPDATE users SET username = '{$inputUsername}', password='{$hashedPassword}',first_name='{$inputFirstName}',last_name='{$inputLastName}',email='{$inputEmail}', picture='{$userImageNew}' WHERE id = {$userId}";
     $saveProfileQueryResult = mysqli_query($dbConnection, $saveProfileQuery);
     header("Location: index.php");
 }
@@ -78,7 +77,7 @@ if (isset($_POST['save'])) {
 <div class="div-container">
     <div class="content">
         <h2 class="text-center">Profile</h2>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="image">Image</label>
                 <br>
