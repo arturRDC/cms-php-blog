@@ -78,3 +78,4 @@ if (isset($_POST['login'])) {
         </form>
     </div>
 </div>
+<?php include "includes/lower.php" ?>

@@ -75,3 +75,4 @@ if (isset($_POST['signup'])) {
         </form>
     </div>
 </div>
+<?php include "includes/lower.php" ?>
