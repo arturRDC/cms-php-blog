@@ -13,6 +13,9 @@ $username = $_SESSION['username'];
         <a class="navbar-brand" href="index.php">Administrator Dashboard</a>
     </div>
     <!-- Top Menu Items -->
+    <ul class="nav navbar-left top-nav">
+        <li><a href="../index.php">Home</a></li>
+    </ul>
     <ul class="nav navbar-right top-nav">
         <li><a href="../index.php">Home</a></li>
         <li class="dropdown">
