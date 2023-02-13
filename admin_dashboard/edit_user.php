@@ -31,6 +31,14 @@ if (isset($_POST['save_user'])) {
     $inputEmail = $_POST['email'];
     $inputRole = $_POST['role'];
 
+    // Sanitize inputs
+    $inputUsername = mysqli_real_escape_string($dbConnection, $inputUsername);
+    $inputPassword = mysqli_real_escape_string($dbConnection, $$inputPassword);
+    $inputFirstName = mysqli_real_escape_string($dbConnection, $inputFirstName);
+    $inputLastName = mysqli_real_escape_string($dbConnection, $inputLastName);
+    $inputEmail = mysqli_real_escape_string($dbConnection, $inputEmail);
+    $inputRole = mysqli_real_escape_string($dbConnection, $inputRole);
+
     $userImageNew = $_FILES['image']['name'];
 
     if ($userImageNew) {

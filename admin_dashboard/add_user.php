@@ -2,19 +2,33 @@
 include 'includes/header.php';
 
 if (isset($_POST['add_user'])) {
-    $userUsername = $_POST['username'];
-    $userPassword = $_POST['password'];
-    $userFirstName = $_POST['first_name'];
-    $userLastName = $_POST['last_name'];
-    $userEmail = $_POST['email'];
-    $userRole = $_POST['role'];
+    $inputUsername = $_POST['username'];
+    $inputPassword = $_POST['password'];
+    $inputFirstName = $_POST['first_name'];
+    $inputLastName = $_POST['last_name'];
+    $inputEmail = $_POST['email'];
+    $inputRole = $_POST['role'];
+
+    // Sanitize inputs
+    $userUsername = mysqli_real_escape_string($dbConnection, $inputUsername);
+    $userPassword = mysqli_real_escape_string($dbConnection, $$inputPassword);
+    $userFirstName = mysqli_real_escape_string($dbConnection, $inputFirstName);
+    $userLastName = mysqli_real_escape_string($dbConnection, $inputLastName);
+    $userEmail = mysqli_real_escape_string($dbConnection, $inputEmail);
+    $userRole = mysqli_real_escape_string($dbConnection, $inputRole);
+
+
+
+
     $userRandomSalt = bin2hex(openssl_random_pseudo_bytes(11));
     $Hformat = '$2y$10$';
     $hashedPassword = crypt($userPassword, $Hformat . $userRandomSalt);
 
+
     $userImage = $_FILES['image']['name'];
     $userLocalImage = $_FILES['image']['tmp_name'];
     move_uploaded_file($userLocalImage, "../images/$userImage");
+
 
     $addUserQuery = "INSERT INTO users(id, username, password, first_name, last_name, email, role, picture, random_salt) VALUES ('','{$userUsername}','{$hashedPassword}','{$userFirstName}','{$userLastName}','{$userEmail}', '{$userRole}', '{$userImage}', '{$userRandomSalt}')";
     $addUserQueryResult = mysqli_query($dbConnection, $addUserQuery);

@@ -32,6 +32,17 @@ if (isset($_POST['save'])) {
     $postStatus = $_POST['status'];
     $postContent = $_POST['content'];
     $postAuthor = $_POST['author'];
+
+    // Sanitize inputs
+    $postTitle = mysqli_real_escape_string($dbConnection, $postTitle);
+    $postCategoryId = mysqli_real_escape_string($dbConnection, $postCategoryId);
+    $postTags = mysqli_real_escape_string($dbConnection, $postTags);
+    $postStatus = mysqli_real_escape_string($dbConnection, $postStatus);
+    $postContent = mysqli_real_escape_string($dbConnection, $postContent);
+    $postAuthor = mysqli_real_escape_string($dbConnection, $postAuthor);
+
+
+
     $postImageNew = $_FILES['image']['name'];
     $postId = $_GET['id'];
 

@@ -17,11 +17,21 @@ if ($_SESSION['username']) { // User already logged in
     header("Location: index.php");
 }
 if (isset($_POST['signup'])) {
-    $userEmail = $_POST['email'];
     $userUsername = $_POST['username'];
     $userPassword = $_POST['password'];
     $userFirstName = $_POST['first_name'];
     $userLastName = $_POST['last_name'];
+    $userEmail = $_POST['email'];
+
+    // Sanitize inputs
+    $userUsername = mysqli_real_escape_string($dbConnection, $userUsername);
+    $userPassword = mysqli_real_escape_string($dbConnection, $userPassword);
+    $userFirstName = mysqli_real_escape_string($dbConnection, $userFirstName);
+    $userLastName = mysqli_real_escape_string($dbConnection, $userLastName);
+    $userEmail = mysqli_real_escape_string($dbConnection, $userEmail);
+
+
+
     $userRandomSalt = bin2hex(openssl_random_pseudo_bytes(11));
     $Hformat = '$2y$10$';
     $hashedPassword = crypt($userPassword, $Hformat . $userRandomSalt);

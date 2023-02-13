@@ -9,6 +9,15 @@ if (isset($_POST['submit'])) {
     $postContent = $_POST['content'];
     $postAuthor = $_POST['author'];
 
+
+    // Sanitize inputs
+    $postTitle = mysqli_real_escape_string($dbConnection, $postTitle);
+    $postCategoryId = mysqli_real_escape_string($dbConnection, $postCategoryId);
+    $postTags = mysqli_real_escape_string($dbConnection, $postTags);
+    $postStatus = mysqli_real_escape_string($dbConnection, $postStatus);
+    $postContent = mysqli_real_escape_string($dbConnection, $postContent);
+    $postAuthor = mysqli_real_escape_string($dbConnection, $postAuthor);
+
     $postImage = $_FILES['image']['name'];
     $postLocalImage = $_FILES['image']['tmp_name'];
 
