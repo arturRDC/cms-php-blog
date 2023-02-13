@@ -1,6 +1,6 @@
 <?php
 include 'includes/header.php';
-
+ob_start();
 
 if (isset($_GET['id'])) {
     $editedPostId = $_GET['id'];
@@ -23,19 +23,6 @@ if (isset($_GET['id'])) {
 
         $postCommentAmount = $dbRow['comment_amount'];
     }
-
-
-
-
-    // $addPostQuery = "INSERT INTO posts(id, category_id, tags, author, title, date, image, content, status, comment_amount) VALUES ('','{$categoryId}','{$postTags}','{$postAuthor}','{$postTitle}',now(), '{$postImage}' ,'{$postContent}','{$postStatus}',{$postCommentAmount})";
-    // echo $addPostQuery;
-
-    // $addPostQueryResult = mysqli_query($dbConnection, $addPostQuery);
-
-    // if (!$addPostQueryResult) {
-    //     echo 'failed to add post' . mysqli_error($dbConnection);
-    // }
-    // header('Location: posts.php');
 }
 
 if (isset($_POST['save'])) {
@@ -46,10 +33,14 @@ if (isset($_POST['save'])) {
     $postContent = $_POST['content'];
     $postAuthor = $_POST['author'];
     $postImageNew = $_FILES['image']['name'];
-    $postLocalImage = $_FILES['image']['tmp_name'];
     $postId = $_GET['id'];
 
-    move_uploaded_file($postLocalImage, "../images/$postImage");
+    if ($postImageNew) {
+        $postLocalImage = $_FILES['image']['tmp_name'];
+        move_uploaded_file($postLocalImage, "../images/$postImageNew");
+    } else {
+        $postImageNew = $postImage;
+    }
 
     $editPostQuery = "UPDATE posts SET category_id = {$postCategoryId}, tags = '{$postTags}', author = '{$postAuthor}', title = '{$postTitle}', image = '{$postImageNew}', content = '{$postContent}', status = '{$postStatus}' WHERE id = {$postId}";
     $editPostQueryResult = mysqli_query($dbConnection, $editPostQuery);

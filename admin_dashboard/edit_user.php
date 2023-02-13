@@ -1,33 +1,61 @@
 <?php
 include 'includes/header.php';
+ob_start();
+?>
 
+
+<?php
+if (isset($_GET['id'])) {
+    $userId = $_GET['id'];
+    $userQuery = "SELECT * FROM users WHERE id={$userId}";
+    $userQueryResult = mysqli_query($dbConnection, $userQuery);
+
+    while ($dbRow = mysqli_fetch_assoc($userQueryResult)) {
+        $userUsername = $dbRow['username'];
+        $userFirstName = $dbRow['first_name'];
+        $userLastName = $dbRow['last_name'];
+        $userEmail = $dbRow['email'];
+        $userRole = $dbRow['role'];
+        $userRandomSalt = $dbRow['random_salt'];
+        $userPassword = $dbRow['password'];
+        $userImage = $dbRow['picture'];
+    }
+}
 
 if (isset($_POST['save_user'])) {
     $userId = $_GET['id'];
-    $userUsername = $_POST['username'];
-    $userPassword = $_POST['password'];
-    $userFirstName = $_POST['first_name'];
-    $userLastName = $_POST['last_name'];
-    $userEmail = $_POST['email'];
-    $userRole = $_POST['role'];
+    $inputUsername = $_POST['username'];
+    $inputPassword = $_POST['password'];
+    $inputFirstName = $_POST['first_name'];
+    $inputLastName = $_POST['last_name'];
+    $inputEmail = $_POST['email'];
+    $inputRole = $_POST['role'];
 
-    $userImage = $_FILES['image']['name'];
-    $userLocalImage = $_FILES['image']['tmp_name'];
-    move_uploaded_file($userLocalImage, "../images/$userImage");
+    $userImageNew = $_FILES['image']['name'];
+
+    if ($userImageNew) {
+        $userLocalImage = $_FILES['image']['tmp_name'];
+        move_uploaded_file($userLocalImage, "../images/$userImageNew");
+    } else {
+        $userImageNew = $userImage;
+    }
 
     $Hformat = '$2y$10$';
 
-    $saltQuery = "SELECT * FROM users WHERE id={$userId}";
-    $saltQueryResult = mysqli_query($dbConnection, $saltQuery);
-    while ($dbRow = mysqli_fetch_assoc($saltQueryResult)) {
-        $userRandomSalt = $dbRow['random_salt'];
+    // $saltQuery = "SELECT * FROM users WHERE id={$userId}";
+    // $saltQueryResult = mysqli_query($dbConnection, $saltQuery);
+    // while ($dbRow = mysqli_fetch_assoc($saltQueryResult)) {
+    //     $userRandomSalt = $dbRow['random_salt'];
+    // }
+    $hashedPassword = crypt($inputPassword, $Hformat . $userRandomSalt);
+
+    if ($inputPassword == '') {
+        $hashedPassword = $userPassword;
     }
-    $hashedPassword = crypt($userPassword, $Hformat . $userRandomSalt);
 
 
 
-    $saveUserQuery = "UPDATE users SET username = '{$userUsername}', password='{$hashedPassword}',first_name='{$userFirstName}',last_name='{$userLastName}',email='{$userEmail}', role='{$userRole}', picture='{$userImage}' WHERE id = {$userId}";
-    echo $saveUserQuery;
+    $saveUserQuery = "UPDATE users SET username = '{$inputUsername}', password='{$hashedPassword}',first_name='{$inputFirstName}',last_name='{$inputLastName}',email='{$inputEmail}', role='{$inputRole}', picture='{$userImageNew}' WHERE id = {$userId}";
     $saveUserQueryResult = mysqli_query($dbConnection, $saveUserQuery);
 
     if (!$saveUserQueryResult) {
@@ -61,22 +89,7 @@ if (isset($_POST['save_user'])) {
                             Administrator Dashboard
                             <small>Edit User</small>
                         </h1>
-                        <?php
-                        if (isset($_GET['id'])) {
-                            $userId = $_GET['id'];
-                            $userQuery = "SELECT * FROM users WHERE id={$userId}";
-                            $userQueryResult = mysqli_query($dbConnection, $userQuery);
 
-                            while ($dbRow = mysqli_fetch_assoc($userQueryResult)) {
-                                $userUsername = $dbRow['username'];
-                                $userFirstName = $dbRow['first_name'];
-                                $userLastName = $dbRow['last_name'];
-                                $userEmail = $dbRow['email'];
-                                $userRole = $dbRow['role'];
-                                $userRandomSalt = $dbRow['random_salt'];
-                            }
-                        }
-                        ?>
 
                         <form action="" method="post" enctype="multipart/form-data" class="d-flex align-items-center">
                             <div class="row">
