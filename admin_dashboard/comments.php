@@ -60,7 +60,7 @@ include 'includes/header.php';
                                     echo "<td>{$commentDate}</td>";
                                     echo "<td>{$commentStatus}</td>";
 
-                                    // Read category
+                                    // Read post
                                     $repliedPostQuery = "SELECT * FROM posts WHERE id = {$repliedPostId}";
                                     $repliedPostQueryResult = mysqli_query($dbConnection, $repliedPostQuery);
 
@@ -84,6 +84,19 @@ include 'includes/header.php';
                         // Delete comment
                         if (isset($_GET['delete'])) {
                             $idDelete = $_GET['delete'];
+
+                            // Read post replied to
+                            $readQuery = "SELECT post_id FROM comments WHERE comment_id = {$idDelete}";
+                            $readQueryResult = mysqli_query($dbConnection, $readQuery);
+                            while ($dbRow = mysqli_fetch_assoc($readQueryResult)) {
+                                $postCommented = $dbRow['post_id'];
+                            }
+
+                            // Decrease post comment count
+                            $updateCommentAmountQuery = "UPDATE posts SET comment_amount = comment_amount - 1 WHERE id = {$postCommented}";
+                            $updateCommentAmountQueryResult = mysqli_query($dbConnection, $updateCommentAmountQuery);
+
+                            // Delete comment
                             $deleteQuery = "DELETE FROM comments WHERE comment_id = {$idDelete}";
                             $deleteQueryResult = mysqli_query($dbConnection, $deleteQuery);
                             header('Location: comments.php');
