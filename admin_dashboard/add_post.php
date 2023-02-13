@@ -87,7 +87,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="form-group">
                                 <label for="status">Status</label>
-                                <input type="text" class="form-control" name="status">
+                                <input type="text" class="form-control" name="status" value="draft">
                             </div>
                             <div class="form-group">
                                 <label for="content">Content</label>
