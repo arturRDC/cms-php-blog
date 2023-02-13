@@ -30,7 +30,9 @@ include 'includes/navbar.php';
                 $searchData = $_POST['searchQuery'];
                 $searchData = mysqli_real_escape_string($dbConnection, $searchData);
 
-                $tagQuery = "SELECT * FROM posts WHERE tags LIKE '%$searchData%'";
+                $tagQuery = "SELECT * FROM posts WHERE (title LIKE '%$searchData%' 
+                                                      OR tags LIKE '%$searchData%')
+                                                      AND status = 'published'";
 
                 $tagQueryResults = mysqli_query($dbConnection, $tagQuery);
 
@@ -39,7 +41,6 @@ include 'includes/navbar.php';
                 if (mysqli_num_rows($tagQueryResults) == 0) {
                     echo '<h1> No posts found </h1>';
                 } else {
-                    echo 'found a post';
                     while ($dbRow = mysqli_fetch_assoc($tagQueryResults)) {
                         $postTags = $dbRow['tags'];
                         $postAuthor = $dbRow['author'];
