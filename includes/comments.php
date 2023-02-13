@@ -20,6 +20,9 @@ if (isset($_POST['post_comment'])) {
     // Update comment count in database
     $commentCountQuery = "UPDATE posts SET comment_amount = comment_amount + 1 WHERE id = {$postId}";
     $commentCountQueryResult = mysqli_query($dbConnection, $commentCountQuery);
+    if ($commentCountQueryResult) {
+        echo "<h3> Your comment is pending approval. Come back later </h3>";
+    }
 }
 ?>
 
