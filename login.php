@@ -13,6 +13,10 @@ include 'includes/navbar.php';
 <link rel="stylesheet" href="css/login.css">
 
 <?php
+ob_start();
+if ($_SESSION['username']) { // User already logged in
+    header("Location: index.php");
+}
 
 if (isset($_POST['login'])) {
     $loginUsername = $_POST['username'];
