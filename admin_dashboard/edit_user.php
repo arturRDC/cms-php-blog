@@ -50,11 +50,6 @@ if (isset($_POST['save_user'])) {
 
     $Hformat = '$2y$10$';
 
-    // $saltQuery = "SELECT * FROM users WHERE id={$userId}";
-    // $saltQueryResult = mysqli_query($dbConnection, $saltQuery);
-    // while ($dbRow = mysqli_fetch_assoc($saltQueryResult)) {
-    //     $userRandomSalt = $dbRow['random_salt'];
-    // }
     $hashedPassword = crypt($inputPassword, $Hformat . $userRandomSalt);
 
     if ($inputPassword == '') {
