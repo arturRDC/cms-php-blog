@@ -12,8 +12,11 @@ if (isset($_POST['add_user'])) {
     $Hformat = '$2y$10$';
     $hashedPassword = crypt($userPassword, $Hformat . $userRandomSalt);
 
+    $userImage = $_FILES['image']['name'];
+    $userLocalImage = $_FILES['image']['tmp_name'];
+    move_uploaded_file($userLocalImage, "../images/$userImage");
 
-    $addUserQuery = "INSERT INTO users(id, username, password, first_name, last_name, email, role, random_salt) VALUES ('','{$userUsername}','{$hashedPassword}','{$userFirstName}','{$userLastName}','{$userEmail}', '{$userRole}', '{$userRandomSalt}')";
+    $addUserQuery = "INSERT INTO users(id, username, password, first_name, last_name, email, role, picture, random_salt) VALUES ('','{$userUsername}','{$hashedPassword}','{$userFirstName}','{$userLastName}','{$userEmail}', '{$userRole}', '{$userImage}', '{$userRandomSalt}')";
     $addUserQueryResult = mysqli_query($dbConnection, $addUserQuery);
 
     if (!$addUserQueryResult) {
@@ -83,6 +86,10 @@ if (isset($_POST['add_user'])) {
                                     <label for="last_name">Last Name</label>
                                     <input type="text" class="form-control" name="last_name">
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="file" name="image">
                             </div>
                             <div class="form-group">
                                 <input class="btn btn-primary" type="submit" name="add_user" value="Add User">

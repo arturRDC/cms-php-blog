@@ -30,9 +30,8 @@ include 'includes/header.php';
                                 <tr>
                                     <th>Id</th>
                                     <th>Content</th>
-                                    <th>Author</th>
+                                    <th>Author Id</th>
                                     <th>Date</th>
-                                    <th>Email</th>
                                     <th>Status</th>
                                     <th>Replied to</th>
                                     <th>Approve</th>
@@ -49,18 +48,16 @@ include 'includes/header.php';
                                 while ($dbRow = mysqli_fetch_assoc($commentQueryResult)) {
                                     $commentId = $dbRow['comment_id'];
                                     $commentContent = $dbRow['content'];
-                                    $commentAuthor = $dbRow['author'];
+                                    $commentAuthorId = $dbRow['author_id'];
                                     $commentDate = $dbRow['date'];
-                                    $commentEmail = $dbRow['email'];
                                     $commentStatus = $dbRow['status'];
                                     $repliedPostId = $dbRow['post_id'];
 
                                     echo "<tr>";
                                     echo "<td>{$commentId}</td>";
                                     echo "<td>{$commentContent}</td>";
-                                    echo "<td>{$commentAuthor}</td>";
+                                    echo "<td>{$commentAuthorId}</td>";
                                     echo "<td>{$commentDate}</td>";
-                                    echo "<td>{$commentEmail}</td>";
                                     echo "<td>{$commentStatus}</td>";
 
                                     // Read category

@@ -3,13 +3,17 @@
 <?php
 if (isset($_POST['post_comment'])) {
     $postId = $_GET['id'];
-    $commentAuthor = $_POST['comment_author'];
-    $commentEmail = $_POST['comment_email'];
+
+
+
+    $commentAuthorId = $_SESSION['id'];
+    $commentEmail = $_SESSION['email'];
+
     $commentContent = $_POST['comment_content'];
 
     // Insert comment in database
-    $commentQuery = "INSERT INTO comments(post_id, date, author, email, content, status) ";
-    $commentQuery .= "VALUES ({$postId}, now(), '{$commentAuthor}', '{$commentEmail}', '{$commentContent}', 'unapproved')";
+    $commentQuery = "INSERT INTO comments(post_id, date, author_id, content, status) ";
+    $commentQuery .= "VALUES ({$postId}, now(), '{$commentAuthorId}', '{$commentContent}', 'unapproved')";
 
     $commentQueryResult = mysqli_query($dbConnection, $commentQuery);
 
@@ -23,14 +27,14 @@ if (isset($_POST['post_comment'])) {
 <div class="well">
     <h4>Leave a Comment:</h4>
     <form role="form" action="" method="post">
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="comment_author">Author</label>
             <input type="text" name="comment_author" class="form-control">
         </div>
         <div class="form-group">
             <label for="comment_email">Email</label>
             <input type="email" name="comment_email" class="form-control">
-        </div>
+        </div> -->
         <div class="form-group">
             <textarea class="form-control" rows="3" name="comment_content"></textarea>
         </div>
@@ -49,26 +53,36 @@ $commentQueryResult = mysqli_query($dbConnection, $commentQuery);
 
 while ($dbRow = mysqli_fetch_assoc($commentQueryResult)) {
     $commentContent = $dbRow['content'];
-    $commentAuthor = $dbRow['author'];
     $commentDate = $dbRow['date'];
+    $authorId = $dbRow['author_id'];
+
+    $profileQuery = "SELECT * FROM users WHERE id = {$authorId}";
+    $profileQueryResult = mysqli_query($dbConnection, $profileQuery);
+    while ($profileDbRow = mysqli_fetch_assoc($profileQueryResult)) {
+        $commentAuthor = $profileDbRow['username'];
+        $authorEmail = $profileDbRow['email'];
+        $profilePicture = $profileDbRow['picture'];
+
+
 
 ?>
 
 
 
 
-    <!-- Comment -->
-    <div class="media">
-        <a class="pull-left" href="#">
-            <img class="media-object" src="http://placehold.it/64x64" alt="">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading"><?php echo $commentAuthor ?>
-                <small><?php echo $commentDate ?></small>
-            </h4>
-            <?php echo $commentContent ?>
+        <!-- Comment -->
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src="images/<?php echo $profilePicture ?>" alt="profile picture">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading"><?php echo $commentAuthor ?>
+                    <small><?php echo $commentDate ?></small>
+                </h4>
+                <?php echo $commentContent ?>
+            </div>
         </div>
-    </div>
 <?php
+    }
 }
 ?>

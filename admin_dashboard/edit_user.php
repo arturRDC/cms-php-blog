@@ -10,6 +10,11 @@ if (isset($_POST['save_user'])) {
     $userLastName = $_POST['last_name'];
     $userEmail = $_POST['email'];
     $userRole = $_POST['role'];
+
+    $userImage = $_FILES['image']['name'];
+    $userLocalImage = $_FILES['image']['tmp_name'];
+    move_uploaded_file($userLocalImage, "../images/$userImage");
+
     $Hformat = '$2y$10$';
 
     $saltQuery = "SELECT * FROM users WHERE id={$userId}";
@@ -21,7 +26,7 @@ if (isset($_POST['save_user'])) {
 
 
 
-    $saveUserQuery = "UPDATE users SET username = '{$userUsername}', password='{$hashedPassword}',first_name='{$userFirstName}',last_name='{$userLastName}',email='{$userEmail}', role='{$userRole}' WHERE id = {$userId}";
+    $saveUserQuery = "UPDATE users SET username = '{$userUsername}', password='{$hashedPassword}',first_name='{$userFirstName}',last_name='{$userLastName}',email='{$userEmail}', role='{$userRole}', picture='{$userImage}' WHERE id = {$userId}";
     echo $saveUserQuery;
     $saveUserQueryResult = mysqli_query($dbConnection, $saveUserQuery);
 
@@ -118,6 +123,10 @@ if (isset($_POST['save_user'])) {
                                     <label for="last_name">Last Name</label>
                                     <input type="text" class="form-control" name="last_name" value="<?php echo $userLastName ?>">
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="file" name="image">
                             </div>
                             <div class="form-group">
                                 <input class="btn btn-primary" type="submit" name="save_user" value="Save User">

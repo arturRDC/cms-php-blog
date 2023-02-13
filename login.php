@@ -30,11 +30,15 @@ if (isset($_POST['login'])) {
         $userPassword = $dbRow['password'];
         $userFirstName = $dbRow['first_name'];
         $userRole = $dbRow['role'];
+        $userEmail = $dbRow['email'];
+        $userId = $dbRow['id'];
         $userSalt = $dbRow['random_salt'];
     }
     $Hformat = '$2y$10$';
     if (hash_equals($userPassword, crypt($loginPassword, $Hformat . $userSalt))) { // Login successful
         $_SESSION['username'] = $userUsername;
+        $_SESSION['email'] = $userEmail;
+        $_SESSION['id'] = $userId;
         $_SESSION['first_name'] = $userFirstName;
         $_SESSION['role'] = $userRole;
 
