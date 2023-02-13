@@ -48,33 +48,41 @@ if (isset($_POST['add_user'])) {
                             <small>Subheading</small>
                         </h1>
                         <form action="" method="post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="text" class="form-control" name="email">
+                            <div class="row">
+                                <div class="form-group  col-xs-5 col-lg-5">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" name="email">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" name="username">
+                            <div class="row">
+                                <div class="form-group  col-xs-5 col-lg-5">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" name="username">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" name="password">
+                            <div class="row">
+                                <div class="form-group  col-xs-5 col-lg-5">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" name="password">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="role">Role</label>
-                                <select name="role" id="role">
-                                    <option value='user'>Select Role</option>
-                                    <option value='admin'>Admin</option>
-                                    <option value='user'>User</option>
-                                </select>
+                            <label for="role">Role</label>
+                            <select name="role" id="role">
+                                <option value='user'>Select Role</option>
+                                <option value='admin'>Admin</option>
+                                <option value='user'>User</option>
+                            </select>
+                            <div class="row">
+                                <div class="form-group  col-xs-5 col-lg-5">
+                                    <label for="first_name">First Name</label>
+                                    <input type="text" class="form-control" name="first_name">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="first_name">First Name</label>
-                                <input type="text" class="form-control" name="first_name">
-                            </div>
-                            <div class="form-group">
-                                <label for="last_name">Last Name</label>
-                                <input type="text" class="form-control" name="last_name">
+                            <div class="row">
+                                <div class="form-group  col-xs-5 col-lg-5">
+                                    <label for="last_name">Last Name</label>
+                                    <input type="text" class="form-control" name="last_name">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <input class="btn btn-primary" type="submit" name="add_user" value="Add User">

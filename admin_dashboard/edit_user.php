@@ -54,7 +54,7 @@ if (isset($_POST['save_user'])) {
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Administrator Dashboard
-                            <small>Subheading</small>
+                            <small>Edit User</small>
                         </h1>
                         <?php
                         if (isset($_GET['id'])) {
@@ -72,18 +72,25 @@ if (isset($_POST['save_user'])) {
                             }
                         }
                         ?>
-                        <form action="" method="post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="text" class="form-control" name="email" value="<?php echo $userEmail ?>">
+
+                        <form action="" method="post" enctype="multipart/form-data" class="d-flex align-items-center">
+                            <div class="row">
+                                <div class="form-group col-xs-5 col-lg-5">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" name="email" value="<?php echo $userEmail ?>">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" name="username" value="<?php echo $userUsername ?>">
+                            <div class="row">
+                                <div class="form-group col-xs-5 col-lg-5">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" name="username" value="<?php echo $userUsername ?>">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" name="password">
+                            <div class="row">
+                                <div class="form-group col-xs-5 col-lg-5">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" name="password">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="role">Role</label>
@@ -99,13 +106,18 @@ if (isset($_POST['save_user'])) {
                                     ?>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="first_name">First Name</label>
-                                <input type="text" class="form-control" name="first_name" value="<?php echo $userFirstName ?>">
+                            <div class="row">
+                                <div class="form-group col-xs-5 col-lg-5">
+                                    <label for="first_name">First Name</label>
+                                    <input type="text" class="form-control" name="first_name" value="<?php echo $userFirstName ?>">
+                                </div>
+
                             </div>
-                            <div class="form-group">
-                                <label for="last_name">Last Name</label>
-                                <input type="text" class="form-control" name="last_name" value="<?php echo $userLastName ?>">
+                            <div class="row">
+                                <div class="form-group col-xs-5 col-lg-5">
+                                    <label for="last_name">Last Name</label>
+                                    <input type="text" class="form-control" name="last_name" value="<?php echo $userLastName ?>">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <input class="btn btn-primary" type="submit" name="save_user" value="Save User">
@@ -113,9 +125,9 @@ if (isset($_POST['save_user'])) {
 
 
                         </form>
-
-
                     </div>
+
+
                 </div>
                 <!-- /.row -->
 
