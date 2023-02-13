@@ -37,7 +37,7 @@ include 'includes/header.php';
                                     <th class="text-center">Category</th>
                                     <th class="text-center">Image</th>
                                     <th class="text-center">Comments</th>
-                                    <th class="text-center" colspan="2">Control</th>
+                                    <th class="text-center" colspan="4">Control</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -77,19 +77,36 @@ include 'includes/header.php';
                                     echo "<td class='text-center'>$postCommentAmount</td>";
                                     echo "<td><a href='edit_post.php?id={$postId}'>Edit</td>";
                                     echo "<td><a href='posts.php?delete={$postId}'>Delete</td>";
+                                    echo "<td><a href='posts.php?publish={$postId}'>Publish</td>";
+                                    echo "<td><a href='posts.php?unpublish={$postId}'>Unpublish</td>";
                                     echo "</tr>";
                                 }
                                 ?>
                             </tbody>
                         </table>
                         <?php
-                        // Delete category
+                        // Delete post
                         if (isset($_GET['delete'])) {
                             $idDelete = $_GET['delete'];
                             $deleteQuery = "DELETE FROM posts WHERE id = {$idDelete}";
                             $deleteResult = mysqli_query($dbConnection, $deleteQuery);
                             header('Location: posts.php');
                         }
+                        // Publish post
+                        if (isset($_GET['publish'])) {
+                            $idPublish = $_GET['publish'];
+                            $publishQuery = "UPDATE posts SET status = 'published', date = now() WHERE id = {$idPublish}";
+                            $publishResult = mysqli_query($dbConnection, $publishQuery);
+                            header('Location: posts.php');
+                        }
+                        // Unpublish post
+                        if (isset($_GET['unpublish'])) {
+                            $idUnpublish = $_GET['unpublish'];
+                            $unpublishQuery = "UPDATE posts SET status = 'draft' WHERE id = {$idUnpublish}";
+                            $unpublishResult = mysqli_query($dbConnection, $unpublishQuery);
+                            header('Location: posts.php');
+                        }
+
                         ?>
 
                     </div>
