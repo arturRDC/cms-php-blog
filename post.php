@@ -34,6 +34,10 @@ include 'includes/navbar.php';
 
 
             while ($dbRow = mysqli_fetch_assoc($postQueryResult)) {
+                $postStatus = $dbRow['status'];
+                if (strtolower($postStatus) === 'draft') {
+                    header("Location: index.php");
+                }
                 $postTags = $dbRow['tags'];
                 $postAuthor = $dbRow['author'];
                 $postTitle = $dbRow['title'];
