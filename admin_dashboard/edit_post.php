@@ -130,9 +130,7 @@ if (isset($_POST['save'])) {
                             </div>
                             <div class="form-group">
                                 <label for="content">Content</label>
-                                <textarea type="text" class="form-control" name="content" id="" cols="30" rows="10">
-                                    <?php echo $postContent ?>
-                                </textarea>
+                                <textarea type="text" class="form-control" name="content" id="" cols="30" rows="10"><?php echo $postContent ?></textarea>
                             </div>
                             <div class="form-group">
                                 <input class="btn btn-primary" type="submit" name="save" value="Save">

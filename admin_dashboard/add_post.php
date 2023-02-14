@@ -100,8 +100,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="form-group">
                                 <label for="content">Content</label>
-                                <textarea type="text" class="form-control" name="content" id="" cols="30" rows="10">
-                                </textarea>
+                                <textarea type="text" class="form-control" name="content" id="" cols="30" rows="10"></textarea>
                             </div>
                             <div class="form-group">
                                 <input class="btn btn-primary" type="submit" name="submit" value="Publish">
