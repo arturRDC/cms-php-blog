@@ -25,20 +25,35 @@ include 'db.php';
     <div class="well">
         <h4>Categories</h4>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <ul class="list-unstyled">
                     <?php
                     $categoryQuery = 'SELECT * FROM categories';
                     $categoryQueryResult = mysqli_query($dbConnection, $categoryQuery);
+                    $leftCatAmount =  ceil(mysqli_num_rows($categoryQueryResult) / 2);
 
+                    $categoriesDisplayed = 0;
+                    while ($dbRow = mysqli_fetch_assoc($categoryQueryResult)) {
+                        $categoryName = $dbRow['name'];
+                        $categoryId = $dbRow['id'];
+                        echo "<li><a href='categories.php?id={$categoryId}'>{$categoryName}</a>";
+                        $categoriesDisplayed++;
+                        if ($categoriesDisplayed >= $leftCatAmount) break;
+                    }
+                    ?>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <ul class="list-unstyled">
+                    <?php
 
                     while ($dbRow = mysqli_fetch_assoc($categoryQueryResult)) {
                         $categoryName = $dbRow['name'];
                         $categoryId = $dbRow['id'];
                         echo "<li><a href='categories.php?id={$categoryId}'>{$categoryName}</a>";
+                        $categoriesDisplayed++;
                     }
                     ?>
-
                 </ul>
             </div>
 
@@ -48,8 +63,8 @@ include 'db.php';
 
     <!-- Side Widget Well -->
     <div class="well">
-        <h4>Side Widget Well</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+        <h4>The blog's mission</h4>
+        <p>The goal of this website is to be an example of a possible blog created with the CMS system. </p>
     </div>
 
 </div>

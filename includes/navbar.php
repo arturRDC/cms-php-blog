@@ -18,10 +18,10 @@
                     <a href="#">About</a>
                 </li>
                 <li>
-                    <a href="admin_dashboard">Admin Dashboard</a>
+                    <a href="#">Contact</a>
                 </li>
                 <li>
-                    <a href="#">Contact</a>
+                    <a href="admin_dashboard">Admin Dashboard</a>
                 </li>
 
             </ul>
