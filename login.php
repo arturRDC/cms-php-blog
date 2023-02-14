@@ -14,7 +14,7 @@ include 'includes/navbar.php';
 
 <?php
 ob_start();
-if ($_SESSION['username']) { // User already logged in
+if (isset($_SESSION['username'])) { // User already logged in
     header("Location: index.php");
 }
 
