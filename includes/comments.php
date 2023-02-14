@@ -2,14 +2,14 @@
 
 <?php
 if (isset($_POST['post_comment'])) {
-    $postId = $_GET['id'];
+    $postId = escape($_GET['id']);
 
 
 
-    $commentAuthorId = $_SESSION['id'];
-    $commentEmail = $_SESSION['email'];
+    $commentAuthorId = escape($_SESSION['id']);
+    $commentEmail = escape($_SESSION['email']);
 
-    $commentContent = $_POST['comment_content'];
+    $commentContent = escape($_POST['comment_content']);
 
     // Insert comment in database
     $commentQuery = "INSERT INTO comments(post_id, date, author_id, content, status) ";
@@ -30,14 +30,6 @@ if (isset($_POST['post_comment'])) {
 <div class="well">
     <h4>Leave a Comment:</h4>
     <form role="form" action="" method="post">
-        <!-- <div class="form-group">
-            <label for="comment_author">Author</label>
-            <input type="text" name="comment_author" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="comment_email">Email</label>
-            <input type="email" name="comment_email" class="form-control">
-        </div> -->
         <div class="form-group">
             <textarea class="form-control" rows="3" name="comment_content"></textarea>
         </div>

@@ -87,21 +87,21 @@ include 'includes/header.php';
                         <?php
                         // Delete post
                         if (isset($_GET['delete'])) {
-                            $idDelete = $_GET['delete'];
+                            $idDelete = escape($_GET['delete']);
                             $deleteQuery = "DELETE FROM posts WHERE id = {$idDelete}";
                             $deleteResult = mysqli_query($dbConnection, $deleteQuery);
                             header('Location: posts.php');
                         }
                         // Publish post
                         if (isset($_GET['publish'])) {
-                            $idPublish = $_GET['publish'];
+                            $idPublish = escape($_GET['publish']);
                             $publishQuery = "UPDATE posts SET status = 'published', date = now() WHERE id = {$idPublish}";
                             $publishResult = mysqli_query($dbConnection, $publishQuery);
                             header('Location: posts.php');
                         }
                         // Unpublish post
                         if (isset($_GET['unpublish'])) {
-                            $idUnpublish = $_GET['unpublish'];
+                            $idUnpublish = escape($_GET['unpublish']);
                             $unpublishQuery = "UPDATE posts SET status = 'draft' WHERE id = {$idUnpublish}";
                             $unpublishResult = mysqli_query($dbConnection, $unpublishQuery);
                             header('Location: posts.php');

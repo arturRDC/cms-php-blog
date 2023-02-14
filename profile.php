@@ -18,7 +18,7 @@ if (!$_SESSION['username']) { // User not logged in
     header("Location: index.php");
 }
 
-$userId = $_SESSION['id'];
+$userId = escape($_SESSION['id']);
 
 
 $userQuery = "SELECT * FROM users WHERE id={$userId}";
@@ -36,23 +36,18 @@ while ($dbRow = mysqli_fetch_assoc($userQueryResult)) {
 }
 
 if (isset($_POST['save'])) {
-    $inputUsername = $_POST['username'];
-    $inputPassword = $_POST['password'];
-    $inputFirstName = $_POST['first_name'];
-    $inputLastName = $_POST['last_name'];
-    $inputEmail = $_POST['email'];
+    $inputUsername = escape($_POST['username']);
+    $inputPassword = escape($_POST['password']);
+    $inputFirstName = escape($_POST['first_name']);
+    $inputLastName = escape($_POST['last_name']);
+    $inputEmail = escape($_POST['email']);
 
-    // Sanitize inputs
-    $inputUsername = mysqli_real_escape_string($dbConnection, $inputUsername);
-    $inputPassword = mysqli_real_escape_string($dbConnection, $inputPassword);
-    $inputFirstName = mysqli_real_escape_string($dbConnection, $inputFirstName);
-    $inputLastName = mysqli_real_escape_string($dbConnection, $inputLastName);
-    $inputEmail = mysqli_real_escape_string($dbConnection, $inputEmail);
 
-    $userImageNew = $_FILES['image']['name'];
+
+    $userImageNew = escape($_FILES['image']['name']);
 
     if ($userImageNew) {
-        $userLocalImage = $_FILES['image']['tmp_name'];
+        $userLocalImage = escape($_FILES['image']['tmp_name']);
         move_uploaded_file($userLocalImage, "images/$userImageNew");
     } else {
         $userImageNew = $userImage;
@@ -67,7 +62,6 @@ if (isset($_POST['save'])) {
     if ($inputPassword == '') {
         $hashedPassword = $userPassword;
     }
-    echo $userImageNew;
     $saveProfileQuery = "UPDATE users SET username = '{$inputUsername}', password='{$hashedPassword}',first_name='{$inputFirstName}',last_name='{$inputLastName}',email='{$inputEmail}', picture='{$userImageNew}' WHERE id = {$userId}";
     $saveProfileQueryResult = mysqli_query($dbConnection, $saveProfileQuery);
     header("Location: index.php");

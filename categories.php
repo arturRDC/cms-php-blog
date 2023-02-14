@@ -18,7 +18,7 @@ include 'includes/navbar.php';
         <div class="col-md-8">
             <?php
             if (isset($_GET['id'])) {
-                $categoryId = $_GET['id'];
+                $categoryId = escape($_GET['id']);
             }
             $categoryNameQuery = "SELECT * FROM categories WHERE id = $categoryId";
             $categoryNameQueryResult = mysqli_query($dbConnection, $categoryNameQuery);

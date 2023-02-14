@@ -26,7 +26,7 @@ include 'includes/navbar.php';
             <?php
 
             if (isset($_GET['id'])) {
-                $postId = $_GET['id'];
+                $postId = escape($_GET['id']);
             }
 
             $postQuery = "SELECT * FROM posts WHERE id = {$postId}";

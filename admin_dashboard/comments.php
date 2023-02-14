@@ -65,12 +65,8 @@ include 'includes/header.php';
                                     $repliedPostQueryResult = mysqli_query($dbConnection, $repliedPostQuery);
 
                                     while ($dbRow = mysqli_fetch_assoc($repliedPostQueryResult)) {
-                                        // $postName = $dbRow['name'];
-
                                         echo "<td><a href='../post.php?id={$repliedPostId}'>Original Post</a></td>";
                                     }
-
-                                    // echo "<td>{$repliedPostId}</td>";
                                     echo "<td><a href='comments.php?approve={$commentId}'>Approve</td>";
                                     echo "<td><a href='comments.php?reject={$commentId}'>Reject</td>";
                                     echo "<td><a href='comments.php?delete={$commentId}'>Delete</td>";
@@ -83,7 +79,7 @@ include 'includes/header.php';
                         <?php
                         // Delete comment
                         if (isset($_GET['delete'])) {
-                            $idDelete = $_GET['delete'];
+                            $idDelete = escape($_GET['delete']);
 
                             // Read post replied to
                             $readQuery = "SELECT post_id FROM comments WHERE comment_id = {$idDelete}";
@@ -103,14 +99,14 @@ include 'includes/header.php';
                         }
                         // Approve comment
                         if (isset($_GET['approve'])) {
-                            $idApprove = $_GET['approve'];
+                            $idApprove = escape($_GET['approve']);
                             $approveQuery = "UPDATE comments SET status = 'approved' WHERE comment_id = {$idApprove}";
                             $deleteQueryResult = mysqli_query($dbConnection, $approveQuery);
                             header('Location: comments.php');
                         }
                         // Reject comment
                         if (isset($_GET['reject'])) {
-                            $idReject = $_GET['reject'];
+                            $idReject = escape($_GET['reject']);
                             $rejectQuery = "UPDATE comments SET status = 'unapproved' WHERE comment_id = {$idReject}";
                             $rejectQueryResult = mysqli_query($dbConnection, $rejectQuery);
                             header('Location: comments.php');

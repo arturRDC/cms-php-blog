@@ -3,7 +3,7 @@ include 'includes/header.php';
 ob_start();
 
 if (isset($_GET['id'])) {
-    $editedPostId = $_GET['id'];
+    $editedPostId = escape($_GET['id']);
 
     $postQuery = "SELECT * FROM posts WHERE id = {$editedPostId}";
     $editPostQueryResult = mysqli_query($dbConnection, $postQuery);
@@ -26,28 +26,21 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['save'])) {
-    $postTitle = $_POST['title'];
-    $postCategoryId = $_POST['post_category'];
-    $postTags = $_POST['tags'];
-    $postStatus = $_POST['status'];
-    $postContent = $_POST['content'];
-    $postAuthor = $_POST['author'];
-
-    // Sanitize inputs
-    $postTitle = mysqli_real_escape_string($dbConnection, $postTitle);
-    $postCategoryId = mysqli_real_escape_string($dbConnection, $postCategoryId);
-    $postTags = mysqli_real_escape_string($dbConnection, $postTags);
-    $postStatus = mysqli_real_escape_string($dbConnection, $postStatus);
-    $postContent = mysqli_real_escape_string($dbConnection, $postContent);
-    $postAuthor = mysqli_real_escape_string($dbConnection, $postAuthor);
+    $postTitle = escape($_POST['title']);
+    $postCategoryId = escape($_POST['post_category']);
+    $postTags = escape($_POST['tags']);
+    $postStatus = escape($_POST['status']);
+    $postContent = escape($_POST['content']);
+    $postAuthor = escape($_POST['author']);
 
 
 
-    $postImageNew = $_FILES['image']['name'];
-    $postId = $_GET['id'];
+
+    $postImageNew = escape($_FILES['image']['name']);
+    $postId = escape($_GET['id']);
 
     if ($postImageNew) {
-        $postLocalImage = $_FILES['image']['tmp_name'];
+        $postLocalImage = escape($_FILES['image']['tmp_name']);
         move_uploaded_file($postLocalImage, "../images/$postImageNew");
     } else {
         $postImageNew = $postImage;

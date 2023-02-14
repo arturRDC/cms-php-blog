@@ -1,6 +1,7 @@
 <?php
 ob_start();
 include __DIR__ . '/../../includes/db.php';
+include __DIR__ . '/../../includes/functions.php';
 session_start();
 ?>
 

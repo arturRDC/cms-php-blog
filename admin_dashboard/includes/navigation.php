@@ -1,5 +1,5 @@
 <?php
-$username = $_SESSION['username'];
+$username = escape($_SESSION['username']);
 ?>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->

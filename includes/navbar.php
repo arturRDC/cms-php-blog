@@ -15,10 +15,7 @@
             <!-- <ul class="nav navbar-left top-nav"> -->
             <ul class="nav navbar-nav navbar-left">
                 <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
+                    <a href="mailto: artur.rdc1@gmail.com">Contact Email</a>
                 </li>
                 <li>
                     <a href="admin_dashboard">Admin Dashboard</a>

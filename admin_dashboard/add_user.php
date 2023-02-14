@@ -2,20 +2,13 @@
 include 'includes/header.php';
 
 if (isset($_POST['add_user'])) {
-    $inputUsername = $_POST['username'];
-    $inputPassword = $_POST['password'];
-    $inputFirstName = $_POST['first_name'];
-    $inputLastName = $_POST['last_name'];
-    $inputEmail = $_POST['email'];
-    $inputRole = $_POST['role'];
+    $userUsername = escape($_POST['username']);
+    $userPassword = escape($_POST['password']);
+    $userFirstName = escape($_POST['first_name']);
+    $userLastName = escape($_POST['last_name']);
+    $userEmail = escape($_POST['email']);
+    $userRole = escape($_POST['role']);
 
-    // Sanitize inputs
-    $userUsername = mysqli_real_escape_string($dbConnection, $inputUsername);
-    $userPassword = mysqli_real_escape_string($dbConnection, $$inputPassword);
-    $userFirstName = mysqli_real_escape_string($dbConnection, $inputFirstName);
-    $userLastName = mysqli_real_escape_string($dbConnection, $inputLastName);
-    $userEmail = mysqli_real_escape_string($dbConnection, $inputEmail);
-    $userRole = mysqli_real_escape_string($dbConnection, $inputRole);
 
 
 
@@ -25,8 +18,8 @@ if (isset($_POST['add_user'])) {
     $hashedPassword = crypt($userPassword, $Hformat . $userRandomSalt);
 
 
-    $userImage = $_FILES['image']['name'];
-    $userLocalImage = $_FILES['image']['tmp_name'];
+    $userImage = escape($_FILES['image']['name']);
+    $userLocalImage = escape($_FILES['image']['tmp_name']);
     move_uploaded_file($userLocalImage, "../images/$userImage");
 
 

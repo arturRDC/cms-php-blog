@@ -27,8 +27,7 @@ include 'includes/navbar.php';
             if (isset($_POST['submit'])) {
 
                 // Sanitize inputs
-                $searchData = $_POST['searchQuery'];
-                $searchData = mysqli_real_escape_string($dbConnection, $searchData);
+                $searchData = escape($_POST['searchQuery']);
 
                 $tagQuery = "SELECT * FROM posts WHERE (title LIKE '%$searchData%' 
                                                       OR tags LIKE '%$searchData%')

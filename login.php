@@ -19,12 +19,8 @@ if (isset($_SESSION['username'])) { // User already logged in
 }
 
 if (isset($_POST['login'])) {
-    $loginUsername = $_POST['username'];
-    $loginPassword = $_POST['password'];
-
-    // Sanitize inputs
-    $loginUsername = mysqli_real_escape_string($dbConnection, $loginUsername);
-    $loginPassword = mysqli_real_escape_string($dbConnection, $loginPassword);
+    $loginUsername = escape($_POST['username']);
+    $loginPassword = escape($_POST['password']);
 
     $findUsernameQuery = "SELECT * FROM users WHERE username = '{$loginUsername}'";
     $findUsernameQueryResult = mysqli_query($dbConnection, $findUsernameQuery);

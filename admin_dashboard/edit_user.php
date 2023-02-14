@@ -6,7 +6,7 @@ ob_start();
 
 <?php
 if (isset($_GET['id'])) {
-    $userId = $_GET['id'];
+    $userId = escape($_GET['id']);
     $userQuery = "SELECT * FROM users WHERE id={$userId}";
     $userQueryResult = mysqli_query($dbConnection, $userQuery);
 
@@ -23,26 +23,19 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['save_user'])) {
-    $userId = $_GET['id'];
-    $inputUsername = $_POST['username'];
-    $inputPassword = $_POST['password'];
-    $inputFirstName = $_POST['first_name'];
-    $inputLastName = $_POST['last_name'];
-    $inputEmail = $_POST['email'];
-    $inputRole = $_POST['role'];
+    $userId = escape($_GET['id']);
+    $inputUsername = escape($_POST['username']);
+    $inputPassword = escape($_POST['password']);
+    $inputFirstName = escape($_POST['first_name']);
+    $inputLastName = escape($_POST['last_name']);
+    $inputEmail = escape($_POST['email']);
+    $inputRole = escape($_POST['role']);
 
-    // Sanitize inputs
-    $inputUsername = mysqli_real_escape_string($dbConnection, $inputUsername);
-    $inputPassword = mysqli_real_escape_string($dbConnection, $$inputPassword);
-    $inputFirstName = mysqli_real_escape_string($dbConnection, $inputFirstName);
-    $inputLastName = mysqli_real_escape_string($dbConnection, $inputLastName);
-    $inputEmail = mysqli_real_escape_string($dbConnection, $inputEmail);
-    $inputRole = mysqli_real_escape_string($dbConnection, $inputRole);
 
-    $userImageNew = $_FILES['image']['name'];
+    $userImageNew = escape($_FILES['image']['name']);
 
     if ($userImageNew) {
-        $userLocalImage = $_FILES['image']['tmp_name'];
+        $userLocalImage = escape($_FILES['image']['tmp_name']);
         move_uploaded_file($userLocalImage, "../images/$userImageNew");
     } else {
         $userImageNew = $userImage;

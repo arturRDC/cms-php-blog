@@ -29,7 +29,7 @@ include 'includes/header.php';
                             <?php
                             // Create categories
                             if (isset($_POST['submit'])) {
-                                $categoryName = $_POST['category-name'];
+                                $categoryName = escape($_POST['category-name']);
                                 if ($categoryName == '' || empty($categoryName)) {
                                     echo 'Please enter a name for the category';
                                 } else {
@@ -53,7 +53,7 @@ include 'includes/header.php';
 
                             <?php
                             if (isset($_GET['edit'])) {
-                                $categoryId = $_GET['edit'];
+                                $categoryId = escape($_GET['edit']);
                                 include '__DIR__' . '/../includes/edit_categories.php';
                             }
                             ?>
@@ -91,7 +91,7 @@ include 'includes/header.php';
 
                                     <?php
                                     if (isset($_GET['delete'])) {
-                                        $categoryId = $_GET['delete'];
+                                        $categoryId = escape($_GET['delete']);
                                         $deleteCategoryQuery = "DELETE FROM categories WHERE id = {$categoryId}";
                                         $deleteCategoryQueryResult =  mysqli_query($dbConnection, $deleteCategoryQuery);
 

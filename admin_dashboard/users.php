@@ -77,21 +77,21 @@ include 'includes/header.php';
                         <?php
                         // Delete user
                         if (isset($_GET['delete'])) {
-                            $idDelete = $_GET['delete'];
+                            $idDelete = escape($_GET['delete']);
                             $deleteQuery = "DELETE FROM users WHERE id = {$idDelete}";
                             $deleteQueryResult = mysqli_query($dbConnection, $deleteQuery);
                             header('Location: users.php');
                         }
                         // Approve user
                         if (isset($_GET['promote'])) {
-                            $idPromote = $_GET['promote'];
+                            $idPromote = escape($_GET['promote']);
                             $promoteQuery = "UPDATE users SET role = 'admin' WHERE id = {$idPromote}";
                             $promoteQueryResult = mysqli_query($dbConnection, $promoteQuery);
                             header('Location: users.php');
                         }
                         // Demote user
                         if (isset($_GET['demote'])) {
-                            $idDemote = $_GET['demote'];
+                            $idDemote = escape($_GET['demote']);
                             $demoteQuery = "UPDATE users SET role = 'user' WHERE id = {$idDemote}";
                             $demoteQueryResult = mysqli_query($dbConnection, $demoteQuery);
                             header('Location: users.php');
