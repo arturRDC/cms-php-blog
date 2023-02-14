@@ -74,7 +74,7 @@ if (isset($_POST['save'])) {
             <div class="form-group">
                 <label for="image">Image</label>
                 <br>
-                <img width="64" src="images/<?php echo $userImage ?>" alt="post-image" name="post-image">
+                <img width="64" src="images/<?php echo $userImage ?>" alt="profile image">
                 <input type="file" name="image">
             </div>
             <div class="form-group">
