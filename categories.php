@@ -34,7 +34,7 @@ include 'includes/navbar.php';
             <!-- First Blog Post -->
             <?php
 
-            $postQuery = "SELECT * FROM posts WHERE category_id = {$categoryId}";
+            $postQuery = "SELECT * FROM posts WHERE category_id = {$categoryId} AND status = 'published'";
             $postQueryResult = mysqli_query($dbConnection, $postQuery);
 
 
