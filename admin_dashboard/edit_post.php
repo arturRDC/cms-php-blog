@@ -1,6 +1,5 @@
 <?php
 include 'includes/header.php';
-ob_start();
 
 if (isset($_GET['id'])) {
     $editedPostId = escape($_GET['id']);

@@ -12,7 +12,6 @@ include 'includes/navbar.php';
 <link rel="stylesheet" href="css/signup.css">
 
 <?php
-ob_start();
 if ($_SESSION['username']) { // User already logged in
     header("Location: index.php");
 }

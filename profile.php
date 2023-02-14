@@ -13,7 +13,6 @@ include 'includes/navbar.php';
 <link rel="stylesheet" href="css/profile.css">
 
 <?php
-ob_start();
 if (!$_SESSION['username']) { // User not logged in
     header("Location: index.php");
 }
