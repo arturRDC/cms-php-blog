@@ -52,7 +52,7 @@ include 'includes/navbar.php';
                 <img class="img-responsive" src="images/<?php echo $dbRow['image']; ?>" alt="">
                 <hr>
                 <p><?php echo $postContent ?></p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a class="btn btn-primary" href='<?php echo "post.php?id={$postId}" ?>'>Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
             <?php
             }
             ?>
