@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Administrator Dashboard
-                            <small>Subheading</small>
+                            <small>Add Post</small>
                         </h1>
                         <form action="" method="post" enctype="multipart/form-data">
                             <div class="form-group">

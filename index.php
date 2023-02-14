@@ -18,8 +18,8 @@ include 'includes/navbar.php';
         <div class="col-md-8">
 
             <h1 class="page-header">
-                Page Heading
-                <small>Secondary Text</small>
+                Blog
+                <small>All Posts</small>
             </h1>
 
             <!-- First Blog Post -->
@@ -42,7 +42,6 @@ include 'includes/navbar.php';
             ?>
                 <h2>
                     <?php echo "<a href='post.php?id={$postId}'>{$postTitle}</a>" ?>
-                    <!-- <a href="post.php?id="><?php echo $postTitle ?></a> -->
                 </h2>
                 <p class="lead">
                     by <a href="index.php"> <?php echo $postAuthor ?> </a>

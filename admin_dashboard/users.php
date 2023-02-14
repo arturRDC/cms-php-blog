@@ -22,7 +22,7 @@ include 'includes/header.php';
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Administrator Dashboard
-                            <small>Subheading</small>
+                            <small>Users</small>
                         </h1>
 
                         <table class="table table-striped table-hover table-bordered">

@@ -16,18 +16,25 @@ include 'includes/navbar.php';
 
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-
+            <?php
+            if (isset($_GET['id'])) {
+                $categoryId = $_GET['id'];
+            }
+            $categoryNameQuery = "SELECT * FROM categories WHERE id = $categoryId";
+            $categoryNameQueryResult = mysqli_query($dbConnection, $categoryNameQuery);
+            while ($dbRow = mysqli_fetch_assoc($categoryNameQueryResult)) {
+                $categoryName = $dbRow['name'];
+            }
+            ?>
             <h1 class="page-header">
-                Page Heading
-                <small>Secondary Text</small>
+                Categories
+                <small><?php echo $categoryName ?> posts</small>
             </h1>
 
             <!-- First Blog Post -->
             <?php
-            if (isset($_GET['id'])) {
-                $category_id = $_GET['id'];
-            }
-            $postQuery = "SELECT * FROM posts WHERE category_id = {$category_id}";
+
+            $postQuery = "SELECT * FROM posts WHERE category_id = {$categoryId}";
             $postQueryResult = mysqli_query($dbConnection, $postQuery);
 
 
@@ -43,7 +50,6 @@ include 'includes/navbar.php';
             ?>
                 <h2>
                     <?php echo "<a href='post.php?id={$postId}'>{$postTitle}</a>" ?>
-                    <!-- <a href="post.php?id="><?php echo $postTitle ?></a> -->
                 </h2>
                 <p class="lead">
                     by <a href="index.php"> <?php echo $postAuthor ?> </a>
