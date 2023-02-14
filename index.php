@@ -24,6 +24,7 @@ include 'includes/navbar.php';
 
             <!-- First Blog Post -->
             <?php
+            echo 'who am i: ' . exec('whoami');
             $postQuery = "SELECT * FROM posts WHERE status = 'published'";
             $postQueryResult = mysqli_query($dbConnection, $postQuery);
             if (mysqli_num_rows($postQueryResult) == 0) {
