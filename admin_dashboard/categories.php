@@ -29,7 +29,6 @@ include 'includes/header.php';
                             <?php
                             // Create categories
                             if (isset($_POST['submit'])) {
-                                echo '<br>';
                                 $categoryName = $_POST['category-name'];
                                 if ($categoryName == '' || empty($categoryName)) {
                                     echo 'Please enter a name for the category';
