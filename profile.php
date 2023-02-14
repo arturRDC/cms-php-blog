@@ -47,7 +47,7 @@ if (isset($_POST['save'])) {
 
     if ($userImageNew) {
         $userLocalImage = escape($_FILES['image']['tmp_name']);
-        move_uploaded_file($userLocalImage, "images/$userImageNew");
+        move_uploaded_file($userLocalImage, "/$userImageNew");
     } else {
         $userImageNew = $userImage;
     }
