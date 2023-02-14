@@ -1,8 +1,8 @@
 <?php
-if (!defined('DB_HOST')) define('DB_HOST', 'containers-us-west-58.railway.app');
-if (!defined('DB_USER')) define('DB_USER', 'root');
-if (!defined('DB_PASSWORD')) define('DB_PASSWORD', 'KuBgU6P5cwgwZVGo1o78');
-if (!defined('DB_NAME')) define('DB_NAME', 'railway');
-if (!defined('DB_PORT')) define('DB_PORT', 5447);
+if (!defined('DB_HOST')) define('DB_HOST', $_ENV['MYSQLHOST']);
+if (!defined('DB_USER')) define('DB_USER', $_ENV['MYSQLUSER']);
+if (!defined('DB_PASSWORD')) define('DB_PASSWORD', $_ENV['MYSQLPASSWORD']);
+if (!defined('DB_NAME')) define('DB_NAME', $_ENV['MYSQLDATABASE']);
+if (!defined('DB_PORT')) define('DB_PORT', $_ENV['MYSQLPORT']);
 
 $dbConnection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
