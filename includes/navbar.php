@@ -18,7 +18,7 @@
                     <a href="mailto: artur.rdc1@gmail.com">Contact Email</a>
                 </li>
                 <li>
-                    <a href="admin_dashboard">Admin Dashboard</a>
+                    <a href="admin_dashboard/index.php">Admin Dashboard</a>
                 </li>
 
             </ul>

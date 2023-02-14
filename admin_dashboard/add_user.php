@@ -23,7 +23,7 @@ if (isset($_POST['add_user'])) {
     move_uploaded_file($userLocalImage, "../images/$userImage");
 
 
-    $addUserQuery = "INSERT INTO users(id, username, password, first_name, last_name, email, role, picture, random_salt) VALUES ('','{$userUsername}','{$hashedPassword}','{$userFirstName}','{$userLastName}','{$userEmail}', '{$userRole}', '{$userImage}', '{$userRandomSalt}')";
+    $addUserQuery = "INSERT INTO users(username, password, first_name, last_name, email, role, picture, random_salt) VALUES ('{$userUsername}','{$hashedPassword}','{$userFirstName}','{$userLastName}','{$userEmail}', '{$userRole}', '{$userImage}', '{$userRandomSalt}')";
     $addUserQueryResult = mysqli_query($dbConnection, $addUserQuery);
 
     if (!$addUserQueryResult) {

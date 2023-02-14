@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
 
     move_uploaded_file($postLocalImage, "../images/$postImage");
 
-    $addPostQuery = "INSERT INTO posts(id, category_id, tags, author, title, date, image, content, status, comment_amount) VALUES ('','{$categoryId}','{$postTags}','{$postAuthor}','{$postTitle}',now(), '{$postImage}' ,'{$postContent}','{$postStatus}',{$postCommentAmount})";
+    $addPostQuery = "INSERT INTO posts(category_id, tags, author, title, date, image, content, status, comment_amount) VALUES ('{$categoryId}','{$postTags}','{$postAuthor}','{$postTitle}',now(), '{$postImage}' ,'{$postContent}','{$postStatus}',{$postCommentAmount})";
 
     $addPostQueryResult = mysqli_query($dbConnection, $addPostQuery);
 
