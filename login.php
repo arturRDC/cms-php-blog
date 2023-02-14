@@ -24,30 +24,34 @@ if (isset($_POST['login'])) {
 
     $findUsernameQuery = "SELECT * FROM users WHERE username = '{$loginUsername}'";
     $findUsernameQueryResult = mysqli_query($dbConnection, $findUsernameQuery);
+    if (mysqli_num_rows($findUsernameQueryResult) !== 0) {
+        while ($dbRow = mysqli_fetch_assoc($findUsernameQueryResult)) {
+            $userUsername = $dbRow['username'];
+            $userPassword = $dbRow['password'];
+            $userFirstName = $dbRow['first_name'];
+            $userRole = $dbRow['role'];
+            $userEmail = $dbRow['email'];
+            $userId = $dbRow['id'];
+            $userSalt = $dbRow['random_salt'];
+            $Hformat = '$2y$10$';
 
-    while ($dbRow = mysqli_fetch_assoc($findUsernameQueryResult)) {
-        $userUsername = $dbRow['username'];
-        $userPassword = $dbRow['password'];
-        $userFirstName = $dbRow['first_name'];
-        $userRole = $dbRow['role'];
-        $userEmail = $dbRow['email'];
-        $userId = $dbRow['id'];
-        $userSalt = $dbRow['random_salt'];
-    }
-    $Hformat = '$2y$10$';
-    if (hash_equals($userPassword, crypt($loginPassword, $Hformat . $userSalt))) { // Login successful
-        $_SESSION['username'] = $userUsername;
-        $_SESSION['email'] = $userEmail;
-        $_SESSION['id'] = $userId;
-        $_SESSION['first_name'] = $userFirstName;
-        $_SESSION['role'] = $userRole;
+            if (hash_equals($userPassword, crypt($loginPassword, $Hformat . $userSalt))) { // Login successful
+                $_SESSION['username'] = $userUsername;
+                $_SESSION['email'] = $userEmail;
+                $_SESSION['id'] = $userId;
+                $_SESSION['first_name'] = $userFirstName;
+                $_SESSION['role'] = $userRole;
 
-        if ($userRole === 'admin') {
-            header("Location: admin_dashboard/index.php");
-        } else {
-            header("Location: index.php");
+                if ($userRole === 'admin') {
+                    header("Location: admin_dashboard/index.php");
+                } else {
+                    header("Location: index.php");
+                }
+            } else {
+                echo "<h1 class='text-center'>Login Failed</h1>";
+            }
         }
-    } else {
+    } else { // user not registered
         echo "<h1 class='text-center'>Login Failed</h1>";
     }
 }
