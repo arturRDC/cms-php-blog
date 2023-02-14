@@ -16,11 +16,6 @@ include 'includes/header.php';
 
             <div class="container-fluid">
 
-                <?php
-                // header('Location: /../post.php');
-                // echo 'Location: \..\index.php';
-                // header('Location: ..\index.php');
-                ?>
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -34,7 +29,47 @@ include 'includes/header.php';
                     </div>
                 </div>
                 <!-- /.row -->
+                <?php
+                include "dashboard.php";
+                ?>
+                <script type="text/javascript">
+                    google.charts.load("current", {
+                        packages: ["bar"]
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
 
+                    function drawChart() {
+                        var data = google.visualization.arrayToDataTable([
+                            ['Data', 'Amount'],
+
+                            <?php
+                            echo "['Draft Posts', {$numDraftPosts}],";
+                            echo "['Pending Comments', {$numPendingComments}],";
+                            echo "['Posts', {$numPosts}],";
+                            echo "['Comments', {$numComments}],";
+                            echo "['Categories', {$numCategories}],";
+                            echo "['Users', {$numUsers}],";
+                            ?>
+
+                        ]);
+                        console.log(data);
+
+
+                        var options = {
+                            chart: {
+                                title: "",
+                                subtitle: "",
+                            },
+                        };
+
+                        var chart = new google.charts.Bar(
+                            document.getElementById("columnchart_material")
+                        );
+
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                    }
+                </script>
+                <div id="columnchart_material" style="width: auto; height: 500px;"></div>
             </div>
             <!-- /.container-fluid -->
 
