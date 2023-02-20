@@ -17,9 +17,15 @@ if (isset($_SESSION['username'])) { // User already logged in
     header("Location: index.php");
 }
 
-if (isset($_POST['login'])) {
-    $loginUsername = escape($_POST['username']);
-    $loginPassword = escape($_POST['password']);
+
+if (isset($_POST['login']) || isset($_POST['admin-login'])) {
+    if (isset($_POST['admin-login'])) { // demo admin login
+        $loginUsername = 'admin';
+        $loginPassword = 'admin';
+    } else {    // standard login
+        $loginUsername = escape($_POST['username']);
+        $loginPassword = escape($_POST['password']);
+    }
 
     $findUsernameQuery = "SELECT * FROM users WHERE username = '{$loginUsername}'";
     $findUsernameQueryResult = mysqli_query($dbConnection, $findUsernameQuery);
@@ -73,7 +79,9 @@ if (isset($_POST['login'])) {
 
             <button type="button" class="btn btn-link btn-lg" onclick="location.href='signup.php'">Signup</button>
             <hr>
-
+        </form>
+        <form action="" method="post">
+            <button id="demo-link" class="btn btn-link" name="admin-login">Demo Admin Login</button>
         </form>
     </div>
 </div>
