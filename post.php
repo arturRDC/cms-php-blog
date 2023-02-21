@@ -32,7 +32,7 @@ include 'includes/navbar.php';
             $postQuery = "SELECT * FROM posts WHERE id = {$postId}";
             $postQueryResult = mysqli_query($dbConnection, $postQuery);
 
-
+            if (mysqli_num_rows($postQueryResult) == 0) header('Location: index.php');
             while ($dbRow = mysqli_fetch_assoc($postQueryResult)) {
                 $postStatus = $dbRow['status'];
                 if (strtolower($postStatus) === 'draft') {

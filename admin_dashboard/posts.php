@@ -90,6 +90,11 @@ include 'includes/header.php';
                             $idDelete = escape($_GET['delete']);
                             $deleteQuery = "DELETE FROM posts WHERE id = {$idDelete}";
                             $deleteResult = mysqli_query($dbConnection, $deleteQuery);
+
+                            // Delete comments under that post
+                            $deleteCommentsQuery = "DELETE FROM comments WHERE post_id = {$idDelete}";
+                            $deleteCommentsResult = mysqli_query($dbConnection, $deleteCommentsQuery);
+
                             header('Location: posts.php');
                         }
                         // Publish post
