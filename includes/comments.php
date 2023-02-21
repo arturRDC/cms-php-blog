@@ -55,7 +55,6 @@ if (isset($_POST['post_comment'])) {
 $commentQuery = "SELECT * FROM comments WHERE post_id = {$postId} AND status = 'approved' ORDER BY comment_id DESC";
 $commentQueryResult = mysqli_query($dbConnection, $commentQuery);
 
-
 while ($dbRow = mysqli_fetch_assoc($commentQueryResult)) {
     $commentContent = $dbRow['content'];
     $commentDate = $dbRow['date'];
@@ -63,10 +62,20 @@ while ($dbRow = mysqli_fetch_assoc($commentQueryResult)) {
 
     $profileQuery = "SELECT * FROM users WHERE id = {$authorId}";
     $profileQueryResult = mysqli_query($dbConnection, $profileQuery);
-    while ($profileDbRow = mysqli_fetch_assoc($profileQueryResult)) {
+    if (mysqli_num_rows($profileQueryResult) == 0) {
+        $commentAuthor = '[deleted]';
+        $authorEmail = '[deleted]';
+        $profilePicture = 'images/man-303792_640_64x64.png';
+    } else {
+        $profileDbRow = mysqli_fetch_assoc($profileQueryResult);
+
         $commentAuthor = $profileDbRow['username'];
         $authorEmail = $profileDbRow['email'];
         $profilePicture = $profileDbRow['picture'];
+    }
+
+
+
 
 
 
@@ -75,19 +84,19 @@ while ($dbRow = mysqli_fetch_assoc($commentQueryResult)) {
 
 
 
-        <!-- Comment -->
-        <div class="media">
-            <a class="pull-left" href="#">
-                <img class="media-object" src="images/<?php echo $profilePicture ?>" alt="profile picture">
-            </a>
-            <div class="media-body">
-                <h4 class="media-heading"><?php echo $commentAuthor ?>
-                    <small><?php echo $commentDate ?></small>
-                </h4>
-                <?php echo $commentContent ?>
-            </div>
+    <!-- Comment -->
+    <div class="media">
+        <a class="pull-left" href="#">
+            <img class="media-object" src="images/<?php echo $profilePicture ?>" alt="profile picture">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading"><?php echo $commentAuthor ?>
+                <small><?php echo $commentDate ?></small>
+            </h4>
+            <?php echo $commentContent ?>
         </div>
+    </div>
 <?php
-    }
 }
+// }
 ?>
