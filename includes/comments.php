@@ -32,7 +32,13 @@ if (isset($_POST['post_comment'])) {
 
 <!-- Comments Form -->
 <div class="well">
-    <h4>Leave a Comment as anonymous:</h4>
+    <h4>Leave a Comment as <?php
+                            if ($_SESSION['username']) {
+                                echo $_SESSION['username'];
+                            } else {
+                                echo 'anonymous';
+                            }
+                            ?></h4>
     <form role="form" action="" method="post">
         <div class="form-group">
             <textarea class="form-control" rows="3" name="comment_content"></textarea>
