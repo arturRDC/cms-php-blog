@@ -65,7 +65,7 @@ while ($dbRow = mysqli_fetch_assoc($commentQueryResult)) {
     if (mysqli_num_rows($profileQueryResult) == 0) {
         $commentAuthor = '[deleted]';
         $authorEmail = '[deleted]';
-        $profilePicture = 'images/man-303792_640_64x64.png';
+        $profilePicture = 'man-303792_640_64x64.png';
     } else {
         $profileDbRow = mysqli_fetch_assoc($profileQueryResult);
 
