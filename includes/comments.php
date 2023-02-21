@@ -5,9 +5,13 @@ if (isset($_POST['post_comment'])) {
     $postId = escape($_GET['id']);
 
 
-
-    $commentAuthorId = escape($_SESSION['id']);
-    $commentEmail = escape($_SESSION['email']);
+    if ($_SESSION['id']) {
+        $commentAuthorId = escape($_SESSION['id']);
+        $commentEmail = escape($_SESSION['email']);
+    } else {
+        $commentAuthorId = 29;
+        $commentEmail = 'anon@anon.com';
+    }
 
     $commentContent = escape($_POST['comment_content']);
 
@@ -28,7 +32,7 @@ if (isset($_POST['post_comment'])) {
 
 <!-- Comments Form -->
 <div class="well">
-    <h4>Leave a Comment:</h4>
+    <h4>Leave a Comment as anonymous:</h4>
     <form role="form" action="" method="post">
         <div class="form-group">
             <textarea class="form-control" rows="3" name="comment_content"></textarea>
